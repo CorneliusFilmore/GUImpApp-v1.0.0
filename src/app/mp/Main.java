@@ -1,6 +1,9 @@
 package app.mp;
 
+import javafx.stage.FileChooser;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.print.PageFormat;
@@ -20,6 +23,7 @@ public class Main extends JFrame {
         JavaMenu javaMenu = new JavaMenu();
         SideButtons sideButtons = new SideButtons();
         MainTable mainTable = new MainTable();
+
 
         frame.setJMenuBar(javaMenu);
         frame.setLayout(new BorderLayout());
@@ -154,56 +158,73 @@ public class Main extends JFrame {
         javaMenu.otworz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File("C:\\Users\\Cornelius Filmore\\IdeaProjects\\GUIappMP\\Zapisane pliki"));
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Pliki tekstowe", "txt", "text");
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                fileChooser.setFileFilter(filter);
 
-                File file = new File("Zapisane pliki/");
-                String[] fileNames = file.list();
+                int elementCounter = 0;
+                int lineCounter = 0;
+                Scanner sc = null;
 
-                if (fileNames.length == 0) {
-                    JOptionPane.showMessageDialog(frame,
-                            "Brak plików do otwarcia",
-                            "UWAGA",
-                            JOptionPane.WARNING_MESSAGE);
-                } else {
+                int openFile = fileChooser.showOpenDialog(frame);
 
-                    String openFile = (String) JOptionPane.showInputDialog(
-                            frame,
-                            "Podaj nazwę pliku który chesz otworzyć?",
-                            "Uwaga",
-                            JOptionPane.WARNING_MESSAGE,
-                            null,
-                            fileNames,
-                            fileNames[0]
-                    );
-                    // checks if openFile is null
-                    if (openFile == null) {
-                        statusBar.infoBar.setText("NIE OTWARTO");
-                        statusBar.statusBar.setText("Nie Otwarto żadnego pliku");
-                    } else {
-                        for (String fileName : fileNames) {
+                if(openFile == JFileChooser.APPROVE_OPTION) {
 
-                            if (openFile.matches(fileName)) {
+                    try {
+                        sc = new Scanner(fileChooser.getSelectedFile());
+                    } catch (FileNotFoundException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
+                    }
+                   while(sc.hasNextDouble()){
+                        Double ns = sc.nextDouble();
+                        elementCounter++;
+                    }
+                    sc.close();
 
-                                file = new File("Zapisane pliki/" + fileName);
-                                Scanner sc = null;
+                    try {
+                        sc = new Scanner(fileChooser.getSelectedFile());
+                    } catch (FileNotFoundException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
+                    }
 
-                                try {
-                                    sc = new Scanner(file);
-                                } catch (FileNotFoundException fileNotFoundException) {
-                                    fileNotFoundException.printStackTrace();
-                                }
+                    while(sc.hasNextLine()){
+                        String ns = sc.nextLine();
+                        lineCounter++;
+                    }
+                    sc.close();
 
-                                while (sc.hasNext())
-                                    for (int i = 0; i < 5; i++) {
-                                        for (int j = 0; j < 5; j++) {
-                                            mainTable.mainTable.getModel().setValueAt(sc.next(), i, j);
-                                        }
-                                    }
 
-                                statusBar.infoBar.setText("OTWARTO");
-                                statusBar.statusBar.setText("Otwarto plik: " + file);
+                    try {
+                        sc = new Scanner(fileChooser.getSelectedFile());
+                    } catch (FileNotFoundException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
+                    }
+
+
+                    if(elementCounter == 25 && lineCounter == 5 ) {
+
+                        for (int i = 0; i < 5; i++) {
+                            for (int j = 0; j < 5; j++) {
+                                mainTable.mainTable.setValueAt(sc.next(), i, j);
                             }
                         }
+
+                        statusBar.infoBar.setText("OTWARTO");
+                        statusBar.statusBar.setText("Otwarto plik o nazwie: " + fileChooser.getSelectedFile().getName());
+                    }else {
+                        JOptionPane.showMessageDialog(frame,
+                                "Otwarto błedny plik tekstowy",
+                                "Błędny Plik!",
+                                JOptionPane.ERROR_MESSAGE);
+
+                        statusBar.infoBar.setText("BŁĄD");
+                        statusBar.statusBar.setText("Otwarto błedny plik o nazwie: " + fileChooser.getSelectedFile().getName());
+
+                        System.out.println("Wrong file");
                     }
+                    sc.close();
                 }
             }
         });
@@ -224,64 +245,55 @@ public class Main extends JFrame {
         javaMenu.zapiszJako.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String saveFile = (String) JOptionPane.showInputDialog(
-                        frame,
-                        "Podaj nazwę pliku do którego chcesz zapisać?",
-                        "Uwaga",
-                        JOptionPane.WARNING_MESSAGE
-                );
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File("C:\\Users\\Cornelius Filmore\\IdeaProjects\\GUIappMP\\Zapisane pliki"));
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Pliki tekstowe", "txt", ".txt");
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                fileChooser.setFileFilter(filter);
+                BufferedWriter bufferedWriter = null;
 
+                int returnVal = fileChooser.showSaveDialog(frame);
 
-               BufferedWriter bufferedWriter = null;
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
 
-                try {
+                    try {
+                        bufferedWriter = new BufferedWriter(new FileWriter(fileChooser.getSelectedFile() + ".txt"));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
 
-                    if((saveFile + ".txt").equals("null.txt")) {
-                        statusBar.infoBar.setText("NIEZAPISANO");
-                        statusBar.statusBar.setText("Niezapisano pliku.");
-                    }else {
+                    for (int i = 0; i < 5; i++) {
+                        for (int j = 0; j < 5; j++) {
 
-                        bufferedWriter = new BufferedWriter(new FileWriter("Zapisane pliki\\" + saveFile + ".txt"));
-
-                        for (int i = 0; i < 5; i++) {
-                            for (int j = 0; j < 5; j++) {
-
+                            try {
                                 bufferedWriter.write(mainTable.mainTable.getModel().getValueAt(i, j).toString() + " ");
+                            } catch (IOException ioException) {
+                                ioException.printStackTrace();
                             }
-                            bufferedWriter.write(" \n");
                         }
-
-
-                        statusBar.infoBar.setText("ZAPISANO");
-                        statusBar.statusBar.setText("Zapisano do pliku: " + saveFile + ".txt");
-
-                    }
-
-
-                } catch (IOException ioException) {
-
-                    statusBar.infoBar.setText("NIEZAPISANO");
-                    statusBar.statusBar.setText("Niezapisano pliku.");
-
-                    ioException.printStackTrace();
-
-                    if(bufferedWriter != null) {
                         try {
-                            bufferedWriter.close();
-                        } catch (IOException exception) {
-                            exception.printStackTrace();
+                            bufferedWriter.write(" \n");
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
                         }
                     }
+
+                    try {
+                        bufferedWriter.close();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+
+                    System.out.println("File Saved");
+
+                } else {
+                    System.out.println("Canceled Save");
                 }
 
-                try {
-                    bufferedWriter.close();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
+
             }
 
-        });
+    });
 
         /**
          * Exit the java application
