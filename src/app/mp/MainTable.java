@@ -24,7 +24,7 @@ public class MainTable extends JPanel {
 
     TableSliders tableSliders = new TableSliders();
 
-    MainTextField mainTextField = new MainTextField();
+    MainTextArea mainTextArea = new MainTextArea();
 
     Dimension dimension = mainTable.getPreferredSize();
 
@@ -56,8 +56,8 @@ public class MainTable extends JPanel {
        tableSliders.setPreferredSize(new Dimension(1500,60));
        tableSliders.setMaximumSize(new Dimension(1500,60));
 
-       mainTextField.setPreferredSize(new Dimension(1000,180));
-       mainTextField.setMaximumSize(new Dimension(1000,180));
+       mainTextArea.setPreferredSize(new Dimension(1000,180));
+       mainTextArea.setMaximumSize(new Dimension(1000,180));
 
        tableSliders.textField.setPreferredSize(new Dimension(160,25));
        tableSliders.textField.setMaximumSize(new Dimension(160,25));
@@ -80,7 +80,7 @@ public class MainTable extends JPanel {
 
         this.add(tableSliders);
        this.add(scrollPane);
-       this.add(mainTextField);
+       this.add(mainTextArea);
 
 
         tableSliders.rowSlider.addChangeListener(new ChangeListener() {

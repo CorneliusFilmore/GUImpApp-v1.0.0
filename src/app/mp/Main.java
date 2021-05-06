@@ -1,7 +1,5 @@
 package app.mp;
 
-import javafx.stage.FileChooser;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -51,8 +49,8 @@ public class Main extends JFrame {
                     mainTable.tableSliders.rowLabel.setFont(new Font(null, Font.BOLD, 18));
                     mainTable.tableSliders.columnLabel.setFont(new Font(null, Font.BOLD, 18));
 
-                    mainTable.mainTextField.centerBorder.setTitleFont(new Font(null, Font.BOLD, 25));
-                    mainTable.mainTextField.setFont(new Font(null, Font.BOLD, 25));
+                    mainTable.mainTextArea.centerBorder.setTitleFont(new Font(null, Font.BOLD, 25));
+                    mainTable.mainTextArea.setFont(new Font(null, Font.BOLD, 25));
 
                     mainTable.tableSliders.textField.setFont(new Font(null, Font.BOLD, 18));
                     mainTable.tableSliders.labelField.setFont(new Font(null, Font.BOLD, 18));
@@ -78,8 +76,8 @@ public class Main extends JFrame {
                     mainTable.tableSliders.textField.setPreferredSize(new Dimension(frame.getWidth()/6, 30));
                     mainTable.tableSliders.textField.setMaximumSize(new Dimension(frame.getWidth()/6, 30));
 
-                    mainTable.mainTextField.setPreferredSize(new Dimension(frame.getWidth(), 200));
-                    mainTable.mainTextField.setMaximumSize(new Dimension(frame.getWidth(), 200));
+                    mainTable.mainTextArea.setPreferredSize(new Dimension(frame.getWidth(), 200));
+                    mainTable.mainTextArea.setMaximumSize(new Dimension(frame.getWidth(), 200));
 
 
                     statusBar.setPreferredSize(new Dimension(frame.getWidth(), 40));
@@ -99,8 +97,8 @@ public class Main extends JFrame {
 
                     mainTable.tableSliders.rowLabel.setFont(new Font(null, Font.BOLD, 12));
                     mainTable.tableSliders.columnLabel.setFont(new Font(null, Font.BOLD, 12));
-                    mainTable.mainTextField.centerBorder.setTitleFont(new Font(null, Font.BOLD, 12));
-                    mainTable.mainTextField.setFont(new Font(null, Font.BOLD, 12));
+                    mainTable.mainTextArea.centerBorder.setTitleFont(new Font(null, Font.BOLD, 12));
+                    mainTable.mainTextArea.setFont(new Font(null, Font.BOLD, 12));
                     mainTable.tableSliders.textField.setFont(new Font(null, Font.BOLD, 12));
                     mainTable.tableSliders.textField.setFont(new Font(null, Font.BOLD, 12));
                     mainTable.tableSliders.labelField.setFont(new Font(null, Font.BOLD, 12));
@@ -110,8 +108,8 @@ public class Main extends JFrame {
                     mainTable.tableSliders.setPreferredSize(new Dimension(frame.getWidth(), 60));
                     mainTable.tableSliders.setMaximumSize(new Dimension(frame.getWidth(), 60));
 
-                    mainTable.mainTextField.setPreferredSize(new Dimension(frame.getWidth(), 180));
-                    mainTable.mainTextField.setMaximumSize(new Dimension(frame.getWidth(), 180));
+                    mainTable.mainTextArea.setPreferredSize(new Dimension(frame.getWidth(), 180));
+                    mainTable.mainTextArea.setMaximumSize(new Dimension(frame.getWidth(), 180));
 
                     mainTable.tableSliders.rowLabel.setPreferredSize(new Dimension(frame.getWidth()/5, 30));
                     mainTable.tableSliders.rowLabel.setMaximumSize(new Dimension(frame.getWidth()/5, 30));
@@ -283,7 +281,7 @@ public class Main extends JFrame {
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
 
                     try {
-                        bufferedWriter = new BufferedWriter(new FileWriter(fileChooser.getSelectedFile() + ".txt"));
+                        bufferedWriter = new BufferedWriter(new FileWriter(fileChooser.getSelectedFile()));
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
@@ -573,7 +571,7 @@ public class Main extends JFrame {
                     }
                 }
 
-                mainTable.mainTextField.setText("Wartość Min:  " + Collections.min(arrayList));
+                mainTable.mainTextArea.setText("Wartość Min:  " + Collections.min(arrayList));
 
                 statusBar.infoBar.setText("OBLICZONO");
                 statusBar.statusBar.setText("Wartość Min: " + Collections.min(arrayList));
@@ -596,7 +594,7 @@ public class Main extends JFrame {
                     }
                 }
 
-                mainTable.mainTextField.setText("Wartość Max:  " + Collections.max(arrayList));
+                mainTable.mainTextArea.setText("Wartość Max:  " + Collections.max(arrayList));
 
                 statusBar.infoBar.setText("OBLICZONO");
                 statusBar.statusBar.setText("Wartość Max: " + Collections.max(arrayList));
@@ -671,7 +669,7 @@ public class Main extends JFrame {
                             mainTable.mainTable.getModel().setValueAt(a, i, j);
                         }
                     }
-                    mainTable.mainTextField.setText("Wypełniono tablicę wartością: " + a);
+                    mainTable.mainTextArea.setText("Wypełniono tablicę wartością: " + a);
 
                     statusBar.infoBar.setText("WYPEŁNIONO");
                     statusBar.statusBar.setText("Tablica wypełniona warotścią: " + a);
@@ -781,7 +779,7 @@ public class Main extends JFrame {
             }
         }
 
-        mainTable.mainTextField.setText("Wartość Min:  " + Collections.min(arrayList) + " Wartość Max: " + Collections.max(arrayList));
+        mainTable.mainTextArea.setText("Wartość Min:  " + Collections.min(arrayList) + " Wartość Max: " + Collections.max(arrayList));
 
         statusBar.statusBar.setText("Wartość Min: " + Collections.min(arrayList) + " Wartość Max: " + Collections.max(arrayList));
         statusBar.infoBar.setText("WYZNACZONO");
@@ -815,7 +813,7 @@ public class Main extends JFrame {
                             mainTable.mainTable.getModel().setValueAt(a, i, j);
                         }
                     }
-                    mainTable.mainTextField.setText("Wypełniono tablicę wartością: " + a);
+                    mainTable.mainTextArea.setText("Wypełniono tablicę wartością: " + a);
 
                     statusBar.infoBar.setText("WYPEŁNIONO");
                     statusBar.statusBar.setText("Tablica wypełniona warotścią: " + a);
@@ -854,7 +852,7 @@ public class Main extends JFrame {
 
         if(check) {
             mainTable.mainTable.getModel().setValueAt(a, mainTable.tableSliders.rowSlider.getValue() - 1, mainTable.tableSliders.columnSlider.getValue() - 1);
-            mainTable.mainTextField.setText("Dodano wartość: " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
+            mainTable.mainTextArea.setText("Dodano wartość: " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
 
             statusBar.infoBar.setText("DODANO");
             statusBar.statusBar.setText("Dodano " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
@@ -869,6 +867,8 @@ public class Main extends JFrame {
                     "Podanaj jakąś liczbę!",
                     "Uwaga",
                     JOptionPane.WARNING_MESSAGE);
+
+            mainTable.mainTextArea.setText("Nie podano żadnej liczby!");
         } else {
 
             mainTable.tableSliders.textField.setBackground(Color.RED);
@@ -880,6 +880,8 @@ public class Main extends JFrame {
                     "Podana wartość nie jest liczbą!",
                     "Uwaga",
                     JOptionPane.WARNING_MESSAGE);
+
+            mainTable.mainTextArea.setText("Podano błędną wartość nie będącą liczbą!");
         }
         mainTable.tableSliders.textField.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         mainTable.tableSliders.textField.requestFocus(true);
@@ -894,7 +896,7 @@ public class Main extends JFrame {
             }
         }
         value = value / 25;
-        mainTable.mainTextField.setText("Średnia ze wszystkich elementów jest równa: " + value);
+        mainTable.mainTextArea.setText("Średnia ze wszystkich elementów jest równa: " + value);
 
         statusBar.infoBar.setText("OBLICZONO");
         statusBar.statusBar.setText("Średnia wynosi: " + value);
@@ -908,7 +910,7 @@ public class Main extends JFrame {
                 value += Double.parseDouble(String.valueOf(mainTable.mainTable.getModel().getValueAt(i, j)));
             }
         }
-        mainTable.mainTextField.setText("Suma wszystkich elementów jest równa: " + value);
+        mainTable.mainTextArea.setText("Suma wszystkich elementów jest równa: " + value);
 
         statusBar.infoBar.setText("OBLICZONO");
         statusBar.statusBar.setText("Suma wynosi: " + value);
