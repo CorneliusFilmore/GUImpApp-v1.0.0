@@ -24,8 +24,6 @@ public class MainTable extends JPanel {
 
     TableSliders tableSliders = new TableSliders();
 
-    TableInput tableInput = new TableInput();
-
     MainTextField mainTextField = new MainTextField();
 
     Dimension dimension = mainTable.getPreferredSize();
@@ -51,22 +49,37 @@ public class MainTable extends JPanel {
        mainTable.setModel(tableModel);
        mainTable.getTableHeader().setReorderingAllowed(false);
        mainTable.getTableHeader().setResizingAllowed(false);
-       mainTable.setRowHeight(19);
+       mainTable.setRowHeight(39);
 
        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
-       tableSliders.setPreferredSize(new Dimension(1000,50));
-       tableSliders.setMaximumSize(new Dimension(1000,50));
+       tableSliders.setPreferredSize(new Dimension(1500,60));
+       tableSliders.setMaximumSize(new Dimension(1500,60));
 
        mainTextField.setPreferredSize(new Dimension(1000,180));
        mainTextField.setMaximumSize(new Dimension(1000,180));
 
-       tableInput.setPreferredSize(new Dimension(1000,40));
-       tableInput.setMaximumSize(new Dimension(1000,40));
+       tableSliders.textField.setPreferredSize(new Dimension(160,25));
+       tableSliders.textField.setMaximumSize(new Dimension(160,25));
 
-       this.add(tableSliders);
+       tableSliders.labelField.setPreferredSize(new Dimension(110,30));
+       tableSliders.labelField.setMaximumSize(new Dimension(110,30));
+
+        tableSliders.rowLabel.setPreferredSize(new Dimension(120, 30));
+        tableSliders.rowLabel.setMaximumSize(new Dimension(120, 30));
+
+        tableSliders.rowSlider.setPreferredSize(new Dimension(170, 50));
+        tableSliders.rowSlider.setMaximumSize(new Dimension(170, 50));
+
+        tableSliders.columnLabel.setPreferredSize(new Dimension(120, 30));
+        tableSliders.columnLabel.setMaximumSize(new Dimension(120, 30));
+
+        tableSliders.columnSlider.setPreferredSize(new Dimension(170, 50));
+        tableSliders.columnSlider.setMaximumSize(new Dimension(170, 50));
+
+
+        this.add(tableSliders);
        this.add(scrollPane);
-       this.add(tableInput);
        this.add(mainTextField);
 
 
@@ -96,7 +109,7 @@ public class MainTable extends JPanel {
 
         mainTable.changeSelection(tableSliders.rowSlider.getValue() - 1, tableSliders.columnSlider.getValue() - 1, true,false);
 
-       this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+       this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
        this.setBackground(Color.LIGHT_GRAY);
     }
 }

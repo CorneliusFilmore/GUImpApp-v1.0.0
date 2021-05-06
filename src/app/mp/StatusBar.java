@@ -13,7 +13,7 @@ public class StatusBar extends JPanel {
     JTextField statusBar = new JTextField("Status aplilacji");
 
     Dimension labelDimension = new Dimension(70,20);
-    Dimension barDimension = new Dimension(250,20);
+    Dimension barDimension = new Dimension(440,20);
 
     boolean statusBarVisibility = true;
 

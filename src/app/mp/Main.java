@@ -25,6 +25,8 @@ public class Main extends JFrame {
         MainTable mainTable = new MainTable();
 
 
+
+
         frame.setJMenuBar(javaMenu);
         frame.setLayout(new BorderLayout());
         frame.add(northPane, BorderLayout.NORTH);
@@ -42,7 +44,7 @@ public class Main extends JFrame {
                 // maximized window
                 if ((e.getNewState() & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH) {
 
-                    mainTable.mainTable.setRowHeight(frame.getWidth() / 17);
+                    mainTable.mainTable.setRowHeight(frame.getWidth() / 16);
 
                     mainTable.mainTable.setFont(new Font(null, Font.PLAIN, 24));
 
@@ -52,23 +54,33 @@ public class Main extends JFrame {
                     mainTable.mainTextField.centerBorder.setTitleFont(new Font(null, Font.BOLD, 25));
                     mainTable.mainTextField.setFont(new Font(null, Font.BOLD, 25));
 
-                    mainTable.tableInput.textField.setFont(new Font(null, Font.BOLD, 18));
-                    mainTable.tableInput.labelField.setFont(new Font(null, Font.BOLD, 18));
+                    mainTable.tableSliders.textField.setFont(new Font(null, Font.BOLD, 18));
+                    mainTable.tableSliders.labelField.setFont(new Font(null, Font.BOLD, 18));
 
-                    mainTable.tableSliders.setPreferredSize(new Dimension(frame.getWidth(), 80));
-                    mainTable.tableSliders.setMaximumSize(new Dimension(frame.getWidth(), 80));
+                    mainTable.tableSliders.setPreferredSize(new Dimension(frame.getWidth(), 100));
+                    mainTable.tableSliders.setMaximumSize(new Dimension(frame.getWidth(), 100));
+
+                    mainTable.tableSliders.rowLabel.setPreferredSize(new Dimension(frame.getWidth()/6, 50));
+                    mainTable.tableSliders.rowLabel.setMaximumSize(new Dimension(frame.getWidth()/6, 50));
+
+                    mainTable.tableSliders.rowSlider.setPreferredSize(new Dimension(frame.getWidth()/6, 50));
+                    mainTable.tableSliders.rowSlider.setMaximumSize(new Dimension(frame.getWidth()/6, 50));
+
+                    mainTable.tableSliders.columnLabel.setPreferredSize(new Dimension(frame.getWidth()/6, 50));
+                    mainTable.tableSliders.columnLabel.setMaximumSize(new Dimension(frame.getWidth()/6, 50));
+
+                    mainTable.tableSliders.columnSlider.setPreferredSize(new Dimension(frame.getWidth()/6, 50));
+                    mainTable.tableSliders.columnSlider.setMaximumSize(new Dimension(frame.getWidth()/6, 50));
+
+                    mainTable.tableSliders.labelField.setPreferredSize(new Dimension(frame.getWidth()/6, 50));
+                    mainTable.tableSliders.labelField.setMaximumSize(new Dimension(frame.getWidth()/6, 50));
+
+                    mainTable.tableSliders.textField.setPreferredSize(new Dimension(frame.getWidth()/6, 30));
+                    mainTable.tableSliders.textField.setMaximumSize(new Dimension(frame.getWidth()/6, 30));
 
                     mainTable.mainTextField.setPreferredSize(new Dimension(frame.getWidth(), 200));
                     mainTable.mainTextField.setMaximumSize(new Dimension(frame.getWidth(), 200));
 
-                    mainTable.tableInput.setPreferredSize(new Dimension(frame.getWidth(), 40));
-                    mainTable.tableInput.setMaximumSize(new Dimension(frame.getWidth(), 40));
-
-                    mainTable.tableInput.labelField.setPreferredSize(new Dimension(frame.getWidth() / 3, 30));
-                    mainTable.tableInput.labelField.setMaximumSize(new Dimension(frame.getWidth() / 3, 30));
-
-                    mainTable.tableInput.textField.setPreferredSize(new Dimension(frame.getWidth(), 30));
-                    mainTable.tableInput.textField.setMaximumSize(new Dimension(frame.getWidth(), 30));
 
                     statusBar.setPreferredSize(new Dimension(frame.getWidth(), 40));
                     statusBar.setMaximumSize(new Dimension(frame.getWidth(), 40));
@@ -83,30 +95,44 @@ public class Main extends JFrame {
                 }
                 // minimized window
                 else {
-                    mainTable.mainTable.setRowHeight(19);
+                    mainTable.mainTable.setRowHeight(39);
 
                     mainTable.tableSliders.rowLabel.setFont(new Font(null, Font.BOLD, 12));
                     mainTable.tableSliders.columnLabel.setFont(new Font(null, Font.BOLD, 12));
                     mainTable.mainTextField.centerBorder.setTitleFont(new Font(null, Font.BOLD, 12));
                     mainTable.mainTextField.setFont(new Font(null, Font.BOLD, 12));
-                    mainTable.tableInput.textField.setFont(new Font(null, Font.BOLD, 12));
-                    mainTable.tableInput.textField.setFont(new Font(null, Font.BOLD, 12));
-                    mainTable.tableInput.labelField.setFont(new Font(null, Font.BOLD, 12));
+                    mainTable.tableSliders.textField.setFont(new Font(null, Font.BOLD, 12));
+                    mainTable.tableSliders.textField.setFont(new Font(null, Font.BOLD, 12));
+                    mainTable.tableSliders.labelField.setFont(new Font(null, Font.BOLD, 12));
 
                     mainTable.mainTable.setFont(new Font(null, Font.PLAIN, 12));
 
-
-                    mainTable.tableSliders.setPreferredSize(new Dimension(frame.getWidth(), 50));
-                    mainTable.tableSliders.setMaximumSize(new Dimension(frame.getWidth(), 50));
+                    mainTable.tableSliders.setPreferredSize(new Dimension(frame.getWidth(), 60));
+                    mainTable.tableSliders.setMaximumSize(new Dimension(frame.getWidth(), 60));
 
                     mainTable.mainTextField.setPreferredSize(new Dimension(frame.getWidth(), 180));
                     mainTable.mainTextField.setMaximumSize(new Dimension(frame.getWidth(), 180));
 
-                    mainTable.tableInput.labelField.setPreferredSize(new Dimension(frame.getWidth() / 3, 20));
-                    mainTable.tableInput.labelField.setMaximumSize(new Dimension(frame.getWidth() / 3, 20));
+                    mainTable.tableSliders.rowLabel.setPreferredSize(new Dimension(frame.getWidth()/5, 30));
+                    mainTable.tableSliders.rowLabel.setMaximumSize(new Dimension(frame.getWidth()/5, 30));
 
-                    mainTable.tableInput.textField.setPreferredSize(new Dimension(frame.getWidth(), 20));
-                    mainTable.tableInput.textField.setMaximumSize(new Dimension(frame.getWidth(), 20));
+                    mainTable.tableSliders.rowSlider.setPreferredSize(new Dimension(frame.getWidth()/2, 50));
+                    mainTable.tableSliders.rowSlider.setMaximumSize(new Dimension(frame.getWidth()/2, 50));
+
+                    mainTable.tableSliders.columnLabel.setPreferredSize(new Dimension(frame.getWidth()/5, 30));
+                    mainTable.tableSliders.columnLabel.setMaximumSize(new Dimension(frame.getWidth()/5, 30));
+
+                    mainTable.tableSliders.columnSlider.setPreferredSize(new Dimension(frame.getWidth()/2, 50));
+                    mainTable.tableSliders.columnSlider.setMaximumSize(new Dimension(frame.getWidth()/2, 50));
+
+                    mainTable.tableSliders.labelField.setPreferredSize(new Dimension(frame.getWidth()/2, 30));
+                    mainTable.tableSliders.labelField.setMaximumSize(new Dimension(frame.getWidth()/2, 30));
+
+                    mainTable.tableSliders.labelField.setPreferredSize(new Dimension(frame.getWidth()/6, 40));
+                    mainTable.tableSliders.labelField.setMaximumSize(new Dimension(frame.getWidth()/6, 40));
+
+                    mainTable.tableSliders.textField.setPreferredSize(new Dimension(frame.getWidth()/2, 25));
+                    mainTable.tableSliders.textField.setMaximumSize(new Dimension(frame.getWidth()/2, 25));
 
                     statusBar.setPreferredSize(new Dimension(frame.getWidth(), 30));
                     statusBar.setPreferredSize(new Dimension(frame.getWidth(), 30));
@@ -343,7 +369,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (statusBar.statusBarVisibility) {
 
-                    mainTable.mainTable.setRowHeight(mainTable.mainTable.getRowHeight() + 3);
+                    mainTable.mainTable.setRowHeight(mainTable.mainTable.getRowHeight() + 6);
 
                     statusBar.infoBar.setText("SCHOWANO");
                     statusBar.statusBar.setText("Schowano Pasek Statusu");
@@ -352,7 +378,7 @@ public class Main extends JFrame {
                     statusBar.statusBarVisibility = false;
                 } else {
 
-                    mainTable.mainTable.setRowHeight(mainTable.mainTable.getRowHeight() - 3);
+                    mainTable.mainTable.setRowHeight(mainTable.mainTable.getRowHeight() - 6);
 
                     statusBar.infoBar.setText("ODKRYTO");
                     statusBar.statusBar.setText("Odkryto Pasek Statusu");
@@ -630,7 +656,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 boolean numeric = true;
 
-                String a = mainTable.tableInput.textField.getText();
+                String a = mainTable.tableSliders.textField.getText();
 
                 try {
                     Double num = Double.parseDouble(a);
@@ -639,6 +665,7 @@ public class Main extends JFrame {
                 }
 
                 if (numeric) {
+                    mainTable.tableSliders.textField.setBackground(Color.WHITE);
                     for (int i = 0; i < 5; i++) {
                         for (int j = 0; j < 5; j++) {
                             mainTable.mainTable.getModel().setValueAt(a, i, j);
@@ -653,6 +680,7 @@ public class Main extends JFrame {
                 } else {
                     statusBar.infoBar.setText("BŁĄD");
                     statusBar.statusBar.setText("Wpisana wartość to nie liczba!");
+                    mainTable.tableSliders.textField.setBackground(Color.RED);
 
                     JOptionPane.showMessageDialog(frame,
                             "Wpisana wartość to nie liczba!",
@@ -808,29 +836,33 @@ public class Main extends JFrame {
             }catch (NullPointerException e) {
                 loop = false;
             }
+
+            mainTable.tableSliders.textField.requestFocus(true);
         }
     }
 
     private static void addMethod(MainFrame frame, MainTable mainTable) {
         boolean check = true;
-        String a = mainTable.tableInput.textField.getText();
+        String a = mainTable.tableSliders.textField.getText();
+        mainTable.tableSliders.textField.setBackground(Color.WHITE);
 
         try {
           double b = Double.parseDouble(a);
         } catch (NumberFormatException ex) {
             check = false;
         }
-        
+
         if(check) {
             mainTable.mainTable.getModel().setValueAt(a, mainTable.tableSliders.rowSlider.getValue() - 1, mainTable.tableSliders.columnSlider.getValue() - 1);
-            mainTable.mainTextField.setText("Dodano wartość: " + mainTable.tableInput.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
+            mainTable.mainTextField.setText("Dodano wartość: " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
 
             statusBar.infoBar.setText("DODANO");
-            statusBar.statusBar.setText("Dodano " + mainTable.tableInput.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
+            statusBar.statusBar.setText("Dodano " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
         }else if(a.isEmpty()) {
 
             statusBar.infoBar.setText("BŁĄD");
             statusBar.statusBar.setText("Nie podano wartości!");
+            mainTable.tableSliders.textField.setBackground(Color.RED);
 
             JOptionPane.showMessageDialog(
                     frame,
@@ -839,6 +871,7 @@ public class Main extends JFrame {
                     JOptionPane.WARNING_MESSAGE);
         } else {
 
+            mainTable.tableSliders.textField.setBackground(Color.RED);
             statusBar.infoBar.setText("BŁĄD");
             statusBar.statusBar.setText("Podana wartość nie jest liczbą!");
 
@@ -848,6 +881,8 @@ public class Main extends JFrame {
                     "Uwaga",
                     JOptionPane.WARNING_MESSAGE);
         }
+        mainTable.tableSliders.textField.setCursor(new Cursor(Cursor.TEXT_CURSOR));
+        mainTable.tableSliders.textField.requestFocus(true);
     }
 
     private static void averageMethod(MainTable mainTable) {
