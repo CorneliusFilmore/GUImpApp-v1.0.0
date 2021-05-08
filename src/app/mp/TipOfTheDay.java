@@ -1,18 +1,9 @@
 package app.mp;
 
-import com.l2fprod.common.demo.TOTDTest;
 import com.l2fprod.common.swing.JTipOfTheDay;
-import com.l2fprod.common.swing.plaf.LookAndFeelAddons;
-import com.l2fprod.common.swing.plaf.basic.BasicLookAndFeelAddons;
-import com.l2fprod.common.swing.plaf.basic.BasicTipOfTheDayUI;
-import com.l2fprod.common.swing.plaf.windows.WindowsLookAndFeelAddons;
 import com.l2fprod.common.swing.tips.DefaultTip;
 import com.l2fprod.common.swing.tips.DefaultTipModel;
-
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class TipOfTheDay extends JTipOfTheDay {
     DefaultTipModel tipModel = new DefaultTipModel();
@@ -29,11 +20,10 @@ public class TipOfTheDay extends JTipOfTheDay {
                 "understand the concepts."));
 
         this.setModel(tipModel);
-        this.setCurrentTip(0);
+        this.setCurrentTip(1);
         this.setSize(new Dimension(300,100));
         this.setVisible(true);
         this.showDialog(this);
-
     }
 }
 

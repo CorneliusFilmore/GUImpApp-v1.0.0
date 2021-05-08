@@ -26,6 +26,8 @@ public class MainTable extends JPanel {
 
     MainTextArea mainTextArea = new MainTextArea();
 
+    CalendarField calendarField = new CalendarField();
+
     Dimension dimension = mainTable.getPreferredSize();
 
 
@@ -49,7 +51,7 @@ public class MainTable extends JPanel {
        mainTable.setModel(tableModel);
        mainTable.getTableHeader().setReorderingAllowed(false);
        mainTable.getTableHeader().setResizingAllowed(false);
-       mainTable.setRowHeight(39);
+       mainTable.setRowHeight(33);
 
        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
@@ -79,8 +81,9 @@ public class MainTable extends JPanel {
 
 
         this.add(tableSliders);
-       this.add(scrollPane);
-       this.add(mainTextArea);
+        this.add(scrollPane);
+        this.add(calendarField);
+        this.add(mainTextArea);
 
 
         tableSliders.rowSlider.addChangeListener(new ChangeListener() {
@@ -111,6 +114,8 @@ public class MainTable extends JPanel {
 
        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
        this.setBackground(Color.LIGHT_GRAY);
+
+
     }
 }
 

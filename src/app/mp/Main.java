@@ -1,13 +1,21 @@
 package app.mp;
 
 import com.l2fprod.common.swing.JTipOfTheDay;
+import org.freixas.jcalendar.DateEvent;
+import org.freixas.jcalendar.DateListener;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterJob;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.util.*;
 
@@ -19,16 +27,13 @@ public class Main extends JFrame {
     public static void main(String[] args) {
 
 
+
         MainFrame frame = new MainFrame();
         NorthPane northPane = new NorthPane();
         JavaMenu javaMenu = new JavaMenu();
         SideButtons sideButtons = new SideButtons();
         MainTable mainTable = new MainTable();
         TaskPane taskPane = new TaskPane();
-
-
-
-
 
         frame.setJMenuBar(javaMenu);
         frame.setLayout(new BorderLayout());
@@ -37,6 +42,7 @@ public class Main extends JFrame {
         frame.add(sideButtons, BorderLayout.EAST);
         frame.add(taskPane, BorderLayout.WEST);
         frame.add(statusBar, BorderLayout.PAGE_END);
+
 
 
 
@@ -50,7 +56,7 @@ public class Main extends JFrame {
                 // maximized window
                 if ((e.getNewState() & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH) {
 
-                    mainTable.mainTable.setRowHeight(frame.getWidth() / 16);
+                    mainTable.mainTable.setRowHeight(frame.getWidth() / 17);
 
                     mainTable.mainTable.setFont(new Font(null, Font.PLAIN, 24));
 
@@ -101,7 +107,7 @@ public class Main extends JFrame {
                 }
                 // minimized window
                 else {
-                    mainTable.mainTable.setRowHeight(39);
+                    mainTable.mainTable.setRowHeight(33);
 
                     mainTable.tableSliders.rowLabel.setFont(new Font(null, Font.BOLD, 12));
                     mainTable.tableSliders.columnLabel.setFont(new Font(null, Font.BOLD, 12));
@@ -465,6 +471,29 @@ public class Main extends JFrame {
                 taskPane.printLabel.setBackground(null);
             }
         });
+
+        /**
+         * Table listener
+         */
+
+        mainTable.mainTable.getModel().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+
+                int row = (mainTable.tableSliders.rowSlider.getValue() - 1);
+                int col = (mainTable.tableSliders.columnSlider.getValue() - 1);
+                double valueAt = Double.parseDouble(mainTable.mainTable.getValueAt(mainTable.tableSliders.rowSlider.getValue() - 1, mainTable.tableSliders.columnSlider.getValue() - 1).toString());
+
+
+
+
+
+
+
+            }
+        });
+
+
 
         /**
          *                    JavaMenu Action Listeners
@@ -897,9 +926,21 @@ public class Main extends JFrame {
         });
 
 
+        mainTable.calendarField.calendar.addDateListener(new DateListener() {
+            @Override
+            public void dateChanged(DateEvent e) {
+                mainTable.mainTextArea.setText("Zmieniono datę: " + mainTable.calendarField.calendar.getSelectedItem());
+            }
+        });
+
+
+
+
 
         frame.setVisible(true);
     }
+
+
 
     private static void zeroMethod(MainFrame frame, MainTable mainTable) {
         int newInt = JOptionPane.showOptionDialog(
@@ -997,6 +1038,7 @@ public class Main extends JFrame {
 
     private static void addMethod(MainFrame frame, MainTable mainTable) {
         boolean check = true;
+
         String a = mainTable.tableSliders.textField.getText();
         mainTable.tableSliders.textField.setBackground(Color.WHITE);
 
@@ -1042,6 +1084,9 @@ public class Main extends JFrame {
         }
         mainTable.tableSliders.textField.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         mainTable.tableSliders.textField.requestFocus(true);
+
+
+
     }
 
     private static void averageMethod(MainTable mainTable) {
