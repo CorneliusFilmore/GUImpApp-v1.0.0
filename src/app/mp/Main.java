@@ -1,5 +1,7 @@
 package app.mp;
 
+import com.l2fprod.common.swing.JTipOfTheDay;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -16,11 +18,14 @@ public class Main extends JFrame {
 
     public static void main(String[] args) {
 
+
         MainFrame frame = new MainFrame();
         NorthPane northPane = new NorthPane();
         JavaMenu javaMenu = new JavaMenu();
         SideButtons sideButtons = new SideButtons();
         MainTable mainTable = new MainTable();
+        TaskPane taskPane = new TaskPane();
+
 
 
 
@@ -30,7 +35,10 @@ public class Main extends JFrame {
         frame.add(northPane, BorderLayout.NORTH);
         frame.add(mainTable, BorderLayout.CENTER);
         frame.add(sideButtons, BorderLayout.EAST);
+        frame.add(taskPane, BorderLayout.WEST);
         frame.add(statusBar, BorderLayout.PAGE_END);
+
+
 
 
         /**
@@ -140,6 +148,325 @@ public class Main extends JFrame {
         });
 
         /**
+         * Adding tip of the day when the window opens
+         */
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                TipOfTheDay tipOfTheDay = new TipOfTheDay();
+                super.windowOpened(e);
+            }
+        });
+
+
+        /**
+         *                    JavaTaskPane Action Listeners
+         */
+
+
+        /**
+         * Sum JavaTaskPane
+         */
+
+        taskPane.sumLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                sumMethod(mainTable);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                taskPane.sumLabel.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                taskPane.sumLabel.setBackground(null);
+            }
+        });
+
+        /**
+         * Average JavaTaskPane
+         */
+        taskPane.averageLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                averageMethod(mainTable);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                taskPane.averageLabel.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                taskPane.averageLabel.setBackground(null);
+
+            }
+        });
+
+        /**
+         * Max JavaTaskPane
+         */
+        taskPane.maxLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                maxMethod(mainTable);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                taskPane.maxLabel.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                taskPane.maxLabel.setBackground(null);
+            }
+        });
+
+        /**
+         * Min JavaTaskPane
+         */
+        taskPane.minLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                minMethod(mainTable);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                taskPane.minLabel.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                taskPane.minLabel.setBackground(null);
+            }
+        });
+
+        /**
+         * Open file JavaTaskPane
+         */
+        taskPane.openLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openMethod(frame,mainTable);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                taskPane.openLabel.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                taskPane.openLabel.setBackground(null);
+            }
+        });
+
+        /**
+         * help JavaTaskPane
+         */
+        taskPane.helpLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                helpMethod();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                taskPane.helpLabel.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                taskPane.helpLabel.setBackground(null);
+            }
+        });
+
+        /**
+         * Author JavaTaskPane
+         */
+
+        taskPane.authorLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                authorMethod(frame);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                taskPane.authorLabel.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                taskPane.authorLabel.setBackground(null);
+            }
+        });
+
+        /**
+         * Save JavaTaskPane
+         */
+        taskPane.saveLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                saveMethod(frame,mainTable);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                taskPane.saveLabel.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                taskPane.saveLabel.setBackground(null);
+            }
+        });
+
+        /**
+         * Save as JavaTaskPane
+         */
+        taskPane.saveAsLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                saveAsMethod(frame,mainTable);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                taskPane.saveAsLabel.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                taskPane.saveAsLabel.setBackground(null);
+            }
+        });
+
+        /**
+         * Print JavaTaskPane
+         */
+        taskPane.printLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                printMethod();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                taskPane.printLabel.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                taskPane.printLabel.setBackground(null);
+            }
+        });
+
+        /**
          *                    JavaMenu Action Listeners
          */
 
@@ -182,75 +509,8 @@ public class Main extends JFrame {
         javaMenu.otworz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File("C:\\Users\\Cornelius Filmore\\IdeaProjects\\GUIappMP\\Zapisane pliki"));
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("Pliki tekstowe", "txt", "text");
-                fileChooser.setAcceptAllFileFilterUsed(false);
-                fileChooser.setFileFilter(filter);
-
-                int elementCounter = 0;
-                int lineCounter = 0;
-                Scanner sc = null;
-
-                int openFile = fileChooser.showOpenDialog(frame);
-
-                if(openFile == JFileChooser.APPROVE_OPTION) {
-
-                    try {
-                        sc = new Scanner(fileChooser.getSelectedFile());
-                    } catch (FileNotFoundException fileNotFoundException) {
-                        fileNotFoundException.printStackTrace();
-                    }
-                   while(sc.hasNextDouble()){
-                        Double ns = sc.nextDouble();
-                        elementCounter++;
-                    }
-                    sc.close();
-
-                    try {
-                        sc = new Scanner(fileChooser.getSelectedFile());
-                    } catch (FileNotFoundException fileNotFoundException) {
-                        fileNotFoundException.printStackTrace();
-                    }
-
-                    while(sc.hasNextLine()){
-                        String ns = sc.nextLine();
-                        lineCounter++;
-                    }
-                    sc.close();
-
-
-                    try {
-                        sc = new Scanner(fileChooser.getSelectedFile());
-                    } catch (FileNotFoundException fileNotFoundException) {
-                        fileNotFoundException.printStackTrace();
-                    }
-
-
-                    if(elementCounter == 25 && lineCounter == 5 ) {
-
-                        for (int i = 0; i < 5; i++) {
-                            for (int j = 0; j < 5; j++) {
-                                mainTable.mainTable.setValueAt(sc.next(), i, j);
-                            }
-                        }
-
-                        statusBar.infoBar.setText("OTWARTO");
-                        statusBar.statusBar.setText("Otwarto plik o nazwie: " + fileChooser.getSelectedFile().getName());
-                    }else {
-                        JOptionPane.showMessageDialog(frame,
-                                "Otwarto błedny plik tekstowy",
-                                "Błędny Plik!",
-                                JOptionPane.ERROR_MESSAGE);
-
-                        statusBar.infoBar.setText("BŁĄD");
-                        statusBar.statusBar.setText("Otwarto błedny plik o nazwie: " + fileChooser.getSelectedFile().getName());
-
-                        System.out.println("Wrong file");
-                    }
-                    sc.close();
+                    openMethod(frame,mainTable);
                 }
-            }
         });
 
         /**
@@ -269,52 +529,7 @@ public class Main extends JFrame {
         javaMenu.zapiszJako.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File("C:\\Users\\Cornelius Filmore\\IdeaProjects\\GUIappMP\\Zapisane pliki"));
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("Pliki tekstowe", "txt", ".txt");
-                fileChooser.setAcceptAllFileFilterUsed(false);
-                fileChooser.setFileFilter(filter);
-                BufferedWriter bufferedWriter = null;
-
-                int returnVal = fileChooser.showSaveDialog(frame);
-
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-
-                    try {
-                        bufferedWriter = new BufferedWriter(new FileWriter(fileChooser.getSelectedFile()));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-
-                    for (int i = 0; i < 5; i++) {
-                        for (int j = 0; j < 5; j++) {
-
-                            try {
-                                bufferedWriter.write(mainTable.mainTable.getModel().getValueAt(i, j).toString() + " ");
-                            } catch (IOException ioException) {
-                                ioException.printStackTrace();
-                            }
-                        }
-                        try {
-                            bufferedWriter.write(" \n");
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
-                        }
-                    }
-
-                    try {
-                        bufferedWriter.close();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-
-                    System.out.println("File Saved");
-
-                } else {
-                    System.out.println("Canceled Save");
-                }
-
-
+                saveAsMethod(frame,mainTable);
             }
 
     });
@@ -435,17 +650,7 @@ public class Main extends JFrame {
         javaMenu.informacjeAutor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                ImageIcon logoIcon = new ImageIcon("grafika/logo.jpg");
-
-                statusBar.infoBar.setText("OTWARTO");
-                statusBar.statusBar.setText("Otwarto Infromacje o autorze");
-
-                JOptionPane.showMessageDialog(frame,
-                        "Java Gui App v1.0.0 \n Autor: Maciej Pałubicki \n\n Email: palubicki@codestack.com \n Numer Telefonu: 123456789 \n Copyright \u00a9 by M.Pałubicki 2021",
-                        "Autor",
-                        JOptionPane.PLAIN_MESSAGE,
-                        logoIcon);
+               authorMethod(frame);
             }
         });
 
@@ -471,22 +676,7 @@ public class Main extends JFrame {
         northPane.secondButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    statusBar.infoBar.setText("WYDRUKOWANO");
-                    statusBar.statusBar.setText("Wydrukowano plik");
-
-                    PrinterJob job = PrinterJob.getPrinterJob();
-                    PageFormat pf = new PageFormat();
-                    job.pageDialog(pf);
-                    // job.setPrintable(ListFrame, pf);
-                    if (job.printDialog()) {
-                        job.print();
-                    }
-                } catch (Exception exc) {
-                    statusBar.infoBar.setText("BŁĄD");
-                    statusBar.statusBar.setText("Blad drukowania");
-
-                }
+               printMethod();
             }
         });
 
@@ -562,19 +752,7 @@ public class Main extends JFrame {
         northPane.ninthButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Double> arrayList = new ArrayList<Double>();
-
-                for (int i = 0; i < 5; i++) {
-                    for (int j = 0; j < 5; j++) {
-                        arrayList.add((Double.parseDouble(String.valueOf(mainTable.mainTable.getModel().getValueAt(i, j)))));
-
-                    }
-                }
-
-                mainTable.mainTextArea.setText("Wartość Min:  " + Collections.min(arrayList));
-
-                statusBar.infoBar.setText("OBLICZONO");
-                statusBar.statusBar.setText("Wartość Min: " + Collections.min(arrayList));
+                minMethod(mainTable);
             }
 
         });
@@ -585,19 +763,7 @@ public class Main extends JFrame {
         northPane.tenthButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Double> arrayList = new ArrayList<Double>();
-
-                for (int i = 0; i < 5; i++) {
-                    for (int j = 0; j < 5; j++) {
-                        arrayList.add((Double.parseDouble(String.valueOf(mainTable.mainTable.getModel().getValueAt(i, j)))));
-
-                    }
-                }
-
-                mainTable.mainTextArea.setText("Wartość Max:  " + Collections.max(arrayList));
-
-                statusBar.infoBar.setText("OBLICZONO");
-                statusBar.statusBar.setText("Wartość Max: " + Collections.max(arrayList));
+                maxMethod(mainTable);
             }
 
         });
@@ -618,17 +784,7 @@ public class Main extends JFrame {
         northPane.twelfthButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ImageIcon logoIcon = new ImageIcon("grafika/logo.jpg");
-
-                statusBar.infoBar.setText("OTWARTO");
-                statusBar.statusBar.setText("Otwarto Informacje o Autorze");
-
-                JOptionPane.showMessageDialog(
-                        frame,
-                        "Java Gui App v1.0.0 \n\n Autor: Maciej Pałubicki \n Email: palubicki@codestack.com \n Numer Telefonu: 123456789 \n Copyright \u00a9 by 2021",
-                        "Autor",
-                        JOptionPane.PLAIN_MESSAGE,
-                        logoIcon);
+                authorMethod(frame);
             }
         });
 
@@ -882,6 +1038,7 @@ public class Main extends JFrame {
                     JOptionPane.WARNING_MESSAGE);
 
             mainTable.mainTextArea.setText("Podano błędną wartość nie będącą liczbą!");
+            mainTable.tableSliders.textField.setText("");
         }
         mainTable.tableSliders.textField.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         mainTable.tableSliders.textField.requestFocus(true);
@@ -969,4 +1126,184 @@ public class Main extends JFrame {
             }
     }
 
+    private static void maxMethod(MainTable mainTable){
+        ArrayList<Double> arrayList = new ArrayList<Double>();
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                arrayList.add((Double.parseDouble(String.valueOf(mainTable.mainTable.getModel().getValueAt(i, j)))));
+
+            }
+        }
+
+        mainTable.mainTextArea.setText("Wartość Max:  " + Collections.max(arrayList));
+
+        statusBar.infoBar.setText("OBLICZONO");
+        statusBar.statusBar.setText("Wartość Max: " + Collections.max(arrayList));
+    }
+
+    private static void minMethod(MainTable mainTable) {
+        ArrayList<Double> arrayList = new ArrayList<Double>();
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                arrayList.add((Double.parseDouble(String.valueOf(mainTable.mainTable.getModel().getValueAt(i, j)))));
+
+            }
+        }
+
+        mainTable.mainTextArea.setText("Wartość Min:  " + Collections.min(arrayList));
+
+        statusBar.infoBar.setText("OBLICZONO");
+        statusBar.statusBar.setText("Wartość Min: " + Collections.min(arrayList));
+    }
+
+    private static void openMethod(MainFrame frame,MainTable mainTable) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("C:\\Users\\Cornelius Filmore\\IdeaProjects\\GUIappMP\\Zapisane pliki"));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Pliki tekstowe", "txt", "text");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setFileFilter(filter);
+
+        int elementCounter = 0;
+        int lineCounter = 0;
+        Scanner sc = null;
+
+        int openFile = fileChooser.showOpenDialog(frame);
+
+        if (openFile == JFileChooser.APPROVE_OPTION) {
+
+            try {
+                sc = new Scanner(fileChooser.getSelectedFile());
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+            while (sc.hasNextDouble()) {
+                Double ns = sc.nextDouble();
+                elementCounter++;
+            }
+            sc.close();
+
+            try {
+                sc = new Scanner(fileChooser.getSelectedFile());
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+
+            while (sc.hasNextLine()) {
+                String ns = sc.nextLine();
+                lineCounter++;
+            }
+            sc.close();
+
+
+            try {
+                sc = new Scanner(fileChooser.getSelectedFile());
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+
+
+            if (elementCounter == 25 && lineCounter == 5) {
+
+                for (int i = 0; i < 5; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        mainTable.mainTable.setValueAt(sc.next(), i, j);
+                    }
+                }
+
+                statusBar.infoBar.setText("OTWARTO");
+                statusBar.statusBar.setText("Otwarto plik o nazwie: " + fileChooser.getSelectedFile().getName());
+            } else {
+                JOptionPane.showMessageDialog(frame,
+                        "Otwarto błedny plik tekstowy",
+                        "Błędny Plik!",
+                        JOptionPane.ERROR_MESSAGE);
+
+                statusBar.infoBar.setText("BŁĄD");
+                statusBar.statusBar.setText("Otwarto błedny plik o nazwie: " + fileChooser.getSelectedFile().getName());
+
+                System.out.println("Wrong file");
+            }
+            sc.close();
+        }
+    }
+
+    private static void saveAsMethod(Frame frame, MainTable mainTable) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("C:\\Users\\Cornelius Filmore\\IdeaProjects\\GUIappMP\\Zapisane pliki"));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Pliki tekstowe", "txt", ".txt");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setFileFilter(filter);
+        BufferedWriter bufferedWriter = null;
+
+        int returnVal = fileChooser.showSaveDialog(frame);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+            try {
+                bufferedWriter = new BufferedWriter(new FileWriter(fileChooser.getSelectedFile()));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+
+                    try {
+                        bufferedWriter.write(mainTable.mainTable.getModel().getValueAt(i, j).toString() + " ");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+                try {
+                    bufferedWriter.write(" \n");
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+
+            try {
+                bufferedWriter.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+            System.out.println("File Saved");
+
+        } else {
+            System.out.println("Canceled Save");
+        }
+    }
+
+    private static void printMethod() {
+        try {
+            statusBar.infoBar.setText("WYDRUKOWANO");
+            statusBar.statusBar.setText("Wydrukowano plik");
+
+            PrinterJob job = PrinterJob.getPrinterJob();
+            PageFormat pf = new PageFormat();
+            job.pageDialog(pf);
+
+            if (job.printDialog()) {
+                job.print();
+            }
+        } catch (Exception exc) {
+            statusBar.infoBar.setText("BŁĄD");
+            statusBar.statusBar.setText("Blad drukowania");
+
+        }
+    }
+    private static void authorMethod(MainFrame frame) {
+        ImageIcon logoIcon = new ImageIcon("grafika/logo.jpg");
+
+        statusBar.infoBar.setText("OTWARTO");
+        statusBar.statusBar.setText("Otwarto Infromacje o autorze");
+
+        JOptionPane.showMessageDialog(frame,
+                "Java Gui App v1.0.0 \n Autor: Maciej Pałubicki \n\n Email: palubicki@codestack.com \n Numer Telefonu: 123456789 \n Copyright \u00a9 by M.Pałubicki 2021",
+                "Autor",
+                JOptionPane.PLAIN_MESSAGE,
+                logoIcon);
+    }
 }
