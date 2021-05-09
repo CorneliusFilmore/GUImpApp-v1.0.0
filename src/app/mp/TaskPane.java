@@ -2,15 +2,14 @@ package app.mp;
 
 import com.l2fprod.common.swing.JTaskPane;
 import com.l2fprod.common.swing.JTaskPaneGroup;
-import com.l2fprod.common.swing.plaf.LookAndFeelAddons;
 import com.l2fprod.common.swing.plaf.TaskPaneGroupUI;
 
 import javax.swing.*;
-import javax.swing.text.StyleConstants;
 import java.awt.*;
 
 public class TaskPane extends JPanel {
     JTaskPane taskPane = new JTaskPane();
+    boolean taskPaneVisibility = true;
 
     // calculation group
     JTaskPaneGroup calculationGroup = new JTaskPaneGroup();
@@ -79,6 +78,6 @@ public class TaskPane extends JPanel {
 
         this.add(taskPane);
         this.setBackground(Color.LIGHT_GRAY);
-        this.setVisible(true);
+        this.setVisible(taskPaneVisibility);
     }
 }

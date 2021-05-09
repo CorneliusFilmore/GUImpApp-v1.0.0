@@ -3,7 +3,6 @@ package app.mp;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 public class JavaMenu extends JMenuBar {
@@ -27,6 +26,7 @@ public class JavaMenu extends JMenuBar {
 
     JCheckBoxMenuItem schowajPasekNarzedzi = new JCheckBoxMenuItem("Schowaj Pasek Narzędzi");
     JCheckBoxMenuItem schowajPasekStatusu = new JCheckBoxMenuItem("Schowaj Pasek Statusu");
+    JCheckBoxMenuItem schowajTaskPane = new JCheckBoxMenuItem("Schowaj Pasek po lewej");
 
     JMenuItem sumaElementow = new JMenuItem("Suma Elementów");
     JMenuItem sredniaElementow = new JMenuItem("Średnia Elementów");
@@ -51,6 +51,7 @@ public class JavaMenu extends JMenuBar {
 
         widok.add(schowajPasekNarzedzi);
         widok.add(schowajPasekStatusu);
+        widok.add(schowajTaskPane);
 
         obliczenia.add(sumaElementow);
         obliczenia.add(sredniaElementow);

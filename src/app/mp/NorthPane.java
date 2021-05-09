@@ -1,10 +1,6 @@
 package app.mp;
 
-import com.sun.javafx.scene.control.skin.FXVK;
-import javafx.animation.KeyValue;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class NorthPane extends JToolBar {

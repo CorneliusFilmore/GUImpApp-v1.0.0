@@ -28,7 +28,7 @@ public class MainFrame extends JFrame {
     MainFrame() {
         this.setSize(new Dimension(1000, 600));
         this.setLocationRelativeTo(null);
-        this.setTitle("Java GUI app v 1.0.1");
+        this.setTitle("Java GUI app v 1.0.2");
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.setResizable(true);
         this.setBackground(Color.LIGHT_GRAY);

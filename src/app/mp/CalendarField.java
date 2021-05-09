@@ -17,9 +17,10 @@ public class CalendarField extends JPanel {
 
     CalendarField() {
 
-        calendar.setPreferredSize(new Dimension(120,30));
+        calendar.setPreferredSize(new Dimension(100,30));
         calendar.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
         calendar.setFont(new Font("Arial",Font.BOLD,14));
+        chartButton.setFont(new Font("Arial",Font.BOLD,14));
 
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(1000,30));

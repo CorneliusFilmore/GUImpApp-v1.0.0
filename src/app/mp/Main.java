@@ -41,9 +41,6 @@ public class Main extends JFrame {
         frame.add(statusBar, BorderLayout.PAGE_END);
 
 
-
-
-
         /**
          *  Interface scaling
          */
@@ -53,7 +50,7 @@ public class Main extends JFrame {
                 // maximized window
                 if ((e.getNewState() & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH) {
 
-                    mainTable.mainTable.setRowHeight(frame.getWidth() / 17);
+                    mainTable.mainTable.setRowHeight(frame.getWidth()/18);
 
                     mainTable.mainTable.setFont(new Font(null, Font.PLAIN, 24));
 
@@ -65,6 +62,12 @@ public class Main extends JFrame {
 
                     mainTable.tableSliders.textField.setFont(new Font(null, Font.BOLD, 18));
                     mainTable.tableSliders.labelField.setFont(new Font(null, Font.BOLD, 18));
+
+                    mainTable.calendarField.calendar.setFont(new Font(null, Font.BOLD, 18));
+                    mainTable.calendarField.chartButton.setFont(new Font(null,Font.BOLD,18));
+
+                    mainTable.calendarField.calendar.setPreferredSize(new Dimension(120,50));
+                    mainTable.calendarField.calendar.setMaximumSize(new Dimension(120,50));
 
                     mainTable.tableSliders.setPreferredSize(new Dimension(frame.getWidth(), 100));
                     mainTable.tableSliders.setMaximumSize(new Dimension(frame.getWidth(), 100));
@@ -89,6 +92,9 @@ public class Main extends JFrame {
 
                     mainTable.mainTextArea.setPreferredSize(new Dimension(frame.getWidth(), 200));
                     mainTable.mainTextArea.setMaximumSize(new Dimension(frame.getWidth(), 200));
+
+                    mainTable.calendarField.setPreferredSize(new Dimension(frame.getWidth(),50));
+                    mainTable.calendarField.setMaximumSize(new Dimension(frame.getWidth(),50));
 
 
                     statusBar.setPreferredSize(new Dimension(frame.getWidth(), 40));
@@ -115,6 +121,8 @@ public class Main extends JFrame {
                     mainTable.tableSliders.labelField.setFont(new Font(null, Font.BOLD, 12));
 
                     mainTable.mainTable.setFont(new Font(null, Font.PLAIN, 12));
+                    mainTable.calendarField.calendar.setFont(new Font(null, Font.BOLD, 14));
+                    mainTable.calendarField.chartButton.setFont(new Font(null,Font.BOLD,14));
 
                     mainTable.tableSliders.setPreferredSize(new Dimension(frame.getWidth(), 60));
                     mainTable.tableSliders.setMaximumSize(new Dimension(frame.getWidth(), 60));
@@ -142,6 +150,12 @@ public class Main extends JFrame {
 
                     mainTable.tableSliders.textField.setPreferredSize(new Dimension(frame.getWidth()/2, 25));
                     mainTable.tableSliders.textField.setMaximumSize(new Dimension(frame.getWidth()/2, 25));
+
+                    mainTable.calendarField.setPreferredSize(new Dimension(frame.getWidth(),30));
+                    mainTable.calendarField.setMaximumSize(new Dimension(frame.getWidth(),30));
+
+                    mainTable.calendarField.calendar.setPreferredSize(new Dimension(100,50));
+                    mainTable.calendarField.calendar.setMaximumSize(new Dimension(100,50));
 
                     statusBar.setPreferredSize(new Dimension(frame.getWidth(), 30));
                     statusBar.setPreferredSize(new Dimension(frame.getWidth(), 30));
@@ -593,7 +607,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (statusBar.statusBarVisibility) {
 
-                    mainTable.mainTable.setRowHeight(mainTable.mainTable.getRowHeight() + 6);
+                    mainTable.mainTable.setRowHeight(mainTable.mainTable.getRowHeight() + 7);
 
                     statusBar.infoBar.setText("SCHOWANO");
                     statusBar.statusBar.setText("Schowano Pasek Statusu");
@@ -602,7 +616,7 @@ public class Main extends JFrame {
                     statusBar.statusBarVisibility = false;
                 } else {
 
-                    mainTable.mainTable.setRowHeight(mainTable.mainTable.getRowHeight() - 6);
+                    mainTable.mainTable.setRowHeight(mainTable.mainTable.getRowHeight() - 7);
 
                     statusBar.infoBar.setText("ODKRYTO");
                     statusBar.statusBar.setText("Odkryto Pasek Statusu");
@@ -611,6 +625,27 @@ public class Main extends JFrame {
                     statusBar.statusBarVisibility = true;
                 }
 
+            }
+        });
+
+        javaMenu.schowajTaskPane.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (taskPane.taskPaneVisibility) {
+
+                    statusBar.infoBar.setText("SCHOWANO");
+                    statusBar.statusBar.setText("Schowano Pasek Statusu");
+
+                    taskPane.setVisible(false);
+                    taskPane.taskPaneVisibility = false;
+                } else {
+
+                    statusBar.infoBar.setText("SCHOWANO");
+                    statusBar.statusBar.setText("Schowano Pasek Statusu");
+
+                    taskPane.setVisible(true);
+                    taskPane.taskPaneVisibility = true;
+                }
             }
         });
 
@@ -921,7 +956,7 @@ public class Main extends JFrame {
                         q++;
                     }
                 }
-                
+
                 q=0;
               double checkB = dataTable[0];
                 for(int i=0;i<5;i++) {
@@ -944,7 +979,7 @@ public class Main extends JFrame {
                 }
 
 
-                createChart(dataTable, (int) dataTable[0] + 1,frame);
+                createChart(dataTable,frame);
             }
         });
 
@@ -1379,10 +1414,10 @@ public class Main extends JFrame {
                 logoIcon);
     }
 
-    public static void createChart(double[] numberDataHis,int bit,JFrame mainFrame) {
-        JFrame frame = new JFrame();
+    private static void createChart(double[] numberDataHis,JFrame mainFrame) {
+        JDialog dialog = new JDialog();
         HistogramDataset dataset = new HistogramDataset();
-        dataset.addSeries("Update",numberDataHis,bit);
+        dataset.addSeries("Update",numberDataHis,25);
 
         JFreeChart histogram = ChartFactory.createHistogram(
                 "Wykres",
@@ -1397,14 +1432,16 @@ public class Main extends JFrame {
 
         ChartPanel panel = new ChartPanel(histogram);
 
-        frame.add(panel);
-        frame.setTitle("Histogram");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(new Dimension(600,400));
-        frame.setLocationRelativeTo(frame);
+        panel.setMouseWheelEnabled(true);
+        panel.setMouseZoomable(true);
 
-        frame.setVisible(true);
+        dialog.add(panel);
+        dialog.setTitle("Histogram");
+        dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        dialog.setSize(new Dimension(600,400));
+        dialog.setLocationRelativeTo(dialog);
 
-
+        dialog.setModal(true);
+        dialog.setVisible(true);
     }
 }

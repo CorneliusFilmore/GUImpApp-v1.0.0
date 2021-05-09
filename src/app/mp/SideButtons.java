@@ -1,7 +1,5 @@
 package app.mp;
 
-import org.jfree.chart.JFreeChart;
-
 import javax.swing.*;
 import java.awt.*;
 
