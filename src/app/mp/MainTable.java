@@ -1,5 +1,11 @@
 package app.mp;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.statistics.HistogramDataset;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -45,6 +51,15 @@ public class MainTable extends JPanel {
 
 
     MainTable() {
+
+        double[] dataTable = new double[25];
+        for(int i=0;i<5;i++) {
+            for (int j=0;j<5;j++){
+                dataTable[i+j] = Double.parseDouble(mainTable.getValueAt(i,j).toString());
+            }
+        }
+
+
        scrollPane.setPreferredSize(new Dimension(dimension.width, mainTable.getRowHeight() * (mainTable.getModel().getColumnCount() + 6)));
 
        mainTable.setCellSelectionEnabled(true);

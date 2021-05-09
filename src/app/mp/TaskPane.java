@@ -77,13 +77,6 @@ public class TaskPane extends JPanel {
         taskPane.add(helpGroup);
         taskPane.setBackground(Color.LIGHT_GRAY);
 
-
-
-
-
-
-
-
         this.add(taskPane);
         this.setBackground(Color.LIGHT_GRAY);
         this.setVisible(true);

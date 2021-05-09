@@ -1,21 +1,19 @@
 package app.mp;
 
-import com.l2fprod.common.swing.JTipOfTheDay;
 import org.freixas.jcalendar.DateEvent;
 import org.freixas.jcalendar.DateListener;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.statistics.HistogramDataset;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterJob;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.util.*;
 
@@ -24,9 +22,8 @@ public class Main extends JFrame {
 
     static StatusBar statusBar = new StatusBar();
 
+
     public static void main(String[] args) {
-
-
 
         MainFrame frame = new MainFrame();
         NorthPane northPane = new NorthPane();
@@ -476,22 +473,7 @@ public class Main extends JFrame {
          * Table listener
          */
 
-        mainTable.mainTable.getModel().addTableModelListener(new TableModelListener() {
-            @Override
-            public void tableChanged(TableModelEvent e) {
 
-                int row = (mainTable.tableSliders.rowSlider.getValue() - 1);
-                int col = (mainTable.tableSliders.columnSlider.getValue() - 1);
-                double valueAt = Double.parseDouble(mainTable.mainTable.getValueAt(mainTable.tableSliders.rowSlider.getValue() - 1, mainTable.tableSliders.columnSlider.getValue() - 1).toString());
-
-
-
-
-
-
-
-            }
-        });
 
 
 
@@ -926,6 +908,47 @@ public class Main extends JFrame {
         });
 
 
+        mainTable.calendarField.chartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double[] dataTable = new double[25];
+                int q = 0;
+                int emptyTableInt=0;
+
+                for(int i=0;i<5;i++) {
+                    for (int j=0;j<5;j++) {
+                        dataTable[q] = Double.parseDouble(mainTable.mainTable.getValueAt(i,j).toString());
+                        q++;
+                    }
+                }
+                
+                q=0;
+              double checkB = dataTable[0];
+                for(int i=0;i<5;i++) {
+                    for (int j=0;j<5;j++) {
+                        double test = Double.parseDouble(mainTable.mainTable.getValueAt(i,j).toString());
+                        if(checkB == test) {
+                            q++;
+                        }
+                    }
+                }
+
+
+                if(q==25) {
+                    for(int i=0;i<5;i++) {
+                        for (int j=0;j<5;j++) {
+                            dataTable[emptyTableInt] = checkB;
+                            emptyTableInt++;
+                        }
+                    }
+                }
+
+
+                createChart(dataTable, (int) dataTable[0] + 1,frame);
+            }
+        });
+
+
         mainTable.calendarField.calendar.addDateListener(new DateListener() {
             @Override
             public void dateChanged(DateEvent e) {
@@ -1054,6 +1077,7 @@ public class Main extends JFrame {
 
             statusBar.infoBar.setText("DODANO");
             statusBar.statusBar.setText("Dodano " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
+
         }else if(a.isEmpty()) {
 
             statusBar.infoBar.setText("BŁĄD");
@@ -1084,6 +1108,8 @@ public class Main extends JFrame {
         }
         mainTable.tableSliders.textField.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         mainTable.tableSliders.textField.requestFocus(true);
+
+
 
 
 
@@ -1185,6 +1211,7 @@ public class Main extends JFrame {
 
         statusBar.infoBar.setText("OBLICZONO");
         statusBar.statusBar.setText("Wartość Max: " + Collections.max(arrayList));
+
     }
 
     private static void minMethod(MainTable mainTable) {
@@ -1350,5 +1377,34 @@ public class Main extends JFrame {
                 "Autor",
                 JOptionPane.PLAIN_MESSAGE,
                 logoIcon);
+    }
+
+    public static void createChart(double[] numberDataHis,int bit,JFrame mainFrame) {
+        JFrame frame = new JFrame();
+        HistogramDataset dataset = new HistogramDataset();
+        dataset.addSeries("Update",numberDataHis,bit);
+
+        JFreeChart histogram = ChartFactory.createHistogram(
+                "Wykres",
+                "Liczby",
+                "Powtarzanie",
+                dataset,
+                PlotOrientation.VERTICAL,
+                false,
+                true,
+                false
+        );
+
+        ChartPanel panel = new ChartPanel(histogram);
+
+        frame.add(panel);
+        frame.setTitle("Histogram");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(new Dimension(600,400));
+        frame.setLocationRelativeTo(frame);
+
+        frame.setVisible(true);
+
+
     }
 }
