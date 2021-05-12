@@ -24,7 +24,8 @@ public class SideButtons extends JPanel {
     Dimension buttonDimension = new Dimension(120,40);
 
     String[] listData = {"Suma elementów","Średnia elementów","Wartość max i min"};
-    JList sideList = new JList(listData);
+    JList sideList = new JList();
+    ListModel listModel = new ListModel();
 
     boolean visibilitySideButtons = true;
 
@@ -35,6 +36,11 @@ public class SideButtons extends JPanel {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.setBackground(null);
         this.setVisible(visibilitySideButtons);
+
+        sideList.setModel(listModel);
+        for(int i=0;i<3;i++) {
+            listModel.add(listData[i].toString());
+        }
 
         addButton.setIcon(iconAdd);
         zeroButton.setIcon(iconZero);

@@ -9,6 +9,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.statistics.HistogramDataset;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
@@ -39,6 +41,8 @@ public class Main extends JFrame {
         frame.add(sideButtons, BorderLayout.EAST);
         frame.add(taskPane, BorderLayout.WEST);
         frame.add(statusBar, BorderLayout.PAGE_END);
+
+        mainTable.mainTable.changeSelection(mainTable.tableSliders.rowSlider.getValue() - 1, mainTable.tableSliders.columnSlider.getValue() - 1, true,false);
 
 
         /**
@@ -164,6 +168,36 @@ public class Main extends JFrame {
             }
         });
 
+
+        mainTable.tableSliders.rowSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+
+                mainTable.tableSliders.rowLabel.setText("Wiersz numer = " + mainTable.tableSliders.rowSlider.getValue());
+
+                if (e.getSource() == mainTable.tableSliders.rowSlider) {
+                    mainTable.mainTable.changeSelection(mainTable.tableSliders.rowSlider.getValue() - 1,mainTable.tableSliders.columnSlider.getValue() - 1,false,false);
+                }
+            }
+        });
+
+        mainTable.tableSliders.columnSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+
+                mainTable.tableSliders.columnLabel.setText("Kolumna numer = " + mainTable.tableSliders.columnSlider.getValue());
+
+                if (e.getSource() == mainTable.tableSliders.columnSlider) {
+                    mainTable.mainTable.changeSelection(mainTable.tableSliders.rowSlider.getValue() - 1,mainTable.tableSliders.columnSlider.getValue() - 1,false,false);
+                }
+            }
+        });
+
+
+
+
+
+
         /**
          * Adding tip of the day when the window opens
          */
@@ -185,20 +219,10 @@ public class Main extends JFrame {
          * Sum JavaTaskPane
          */
 
-        taskPane.sumLabel.addMouseListener(new MouseListener() {
+        taskPane.sumLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 sumMethod(mainTable);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
@@ -215,20 +239,10 @@ public class Main extends JFrame {
         /**
          * Average JavaTaskPane
          */
-        taskPane.averageLabel.addMouseListener(new MouseListener() {
+        taskPane.averageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 averageMethod(mainTable);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
@@ -246,20 +260,10 @@ public class Main extends JFrame {
         /**
          * Max JavaTaskPane
          */
-        taskPane.maxLabel.addMouseListener(new MouseListener() {
+        taskPane.maxLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 maxMethod(mainTable);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
@@ -276,20 +280,10 @@ public class Main extends JFrame {
         /**
          * Min JavaTaskPane
          */
-        taskPane.minLabel.addMouseListener(new MouseListener() {
+        taskPane.minLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 minMethod(mainTable);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
@@ -306,20 +300,10 @@ public class Main extends JFrame {
         /**
          * Open file JavaTaskPane
          */
-        taskPane.openLabel.addMouseListener(new MouseListener() {
+        taskPane.openLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 openMethod(frame,mainTable);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
@@ -336,20 +320,10 @@ public class Main extends JFrame {
         /**
          * help JavaTaskPane
          */
-        taskPane.helpLabel.addMouseListener(new MouseListener() {
+        taskPane.helpLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 helpMethod();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
@@ -367,21 +341,12 @@ public class Main extends JFrame {
          * Author JavaTaskPane
          */
 
-        taskPane.authorLabel.addMouseListener(new MouseListener() {
+        taskPane.authorLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 authorMethod(frame);
             }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
 
             public void mouseEntered(MouseEvent e) {
                 taskPane.authorLabel.setBackground(Color.LIGHT_GRAY);
@@ -396,20 +361,10 @@ public class Main extends JFrame {
         /**
          * Save JavaTaskPane
          */
-        taskPane.saveLabel.addMouseListener(new MouseListener() {
+        taskPane.saveLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 saveMethod(frame,mainTable);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
@@ -426,20 +381,10 @@ public class Main extends JFrame {
         /**
          * Save as JavaTaskPane
          */
-        taskPane.saveAsLabel.addMouseListener(new MouseListener() {
+        taskPane.saveAsLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 saveAsMethod(frame,mainTable);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
@@ -456,20 +401,10 @@ public class Main extends JFrame {
         /**
          * Print JavaTaskPane
          */
-        taskPane.printLabel.addMouseListener(new MouseListener() {
+        taskPane.printLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 printMethod();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
@@ -482,12 +417,6 @@ public class Main extends JFrame {
                 taskPane.printLabel.setBackground(null);
             }
         });
-
-        /**
-         * Table listener
-         */
-
-
 
 
 
@@ -517,7 +446,7 @@ public class Main extends JFrame {
                 if (newInt == JOptionPane.YES_OPTION) {
                     for (int i = 0; i < 5; i++) {
                         for (int j = 0; j < 5; j++) {
-                            mainTable.mainTable.getModel().setValueAt(0, i, j);
+                            mainTable.tableModel.setValueAt(0, i, j);
                         }
                     }
 
@@ -868,7 +797,7 @@ public class Main extends JFrame {
                     mainTable.tableSliders.textField.setBackground(Color.WHITE);
                     for (int i = 0; i < 5; i++) {
                         for (int j = 0; j < 5; j++) {
-                            mainTable.mainTable.getModel().setValueAt(a, i, j);
+                            mainTable.tableModel.setValueAt(a, i, j);
                         }
                     }
                     mainTable.mainTextArea.setText("Wypełniono tablicę wartością: " + a);
@@ -1015,7 +944,7 @@ public class Main extends JFrame {
         if (newInt == JOptionPane.YES_OPTION) {
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
-                    mainTable.mainTable.getModel().setValueAt(0, i, j);
+                    mainTable.tableModel.setValueAt(0, i, j);
                 }
             }
 
@@ -1029,7 +958,7 @@ public class Main extends JFrame {
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                arrayList.add((Double.parseDouble(String.valueOf(mainTable.mainTable.getModel().getValueAt(i, j)))));
+                arrayList.add((Double.parseDouble(String.valueOf(mainTable.tableModel.getValueAt(i, j)))));
 
             }
         }
@@ -1065,7 +994,7 @@ public class Main extends JFrame {
                 if (numeric) {
                     for (int i = 0; i < 5; i++) {
                         for (int j = 0; j < 5; j++) {
-                            mainTable.mainTable.getModel().setValueAt(a, i, j);
+                            mainTable.tableModel.setValueAt(a, i, j);
                         }
                     }
                     mainTable.mainTextArea.setText("Wypełniono tablicę wartością: " + a);
@@ -1107,7 +1036,7 @@ public class Main extends JFrame {
         }
 
         if(check) {
-            mainTable.mainTable.getModel().setValueAt(a, mainTable.tableSliders.rowSlider.getValue() - 1, mainTable.tableSliders.columnSlider.getValue() - 1);
+            mainTable.tableModel.setValueAt(a, mainTable.tableSliders.rowSlider.getValue() - 1, mainTable.tableSliders.columnSlider.getValue() - 1);
             mainTable.mainTextArea.setText("Dodano wartość: " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
 
             statusBar.infoBar.setText("DODANO");
@@ -1155,7 +1084,7 @@ public class Main extends JFrame {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
 
-                value += Double.parseDouble(String.valueOf(mainTable.mainTable.getModel().getValueAt(i, j)));
+                value += Double.parseDouble(String.valueOf(mainTable.tableModel.getValueAt(i, j)));
             }
         }
         value = value / 25;
@@ -1170,7 +1099,7 @@ public class Main extends JFrame {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
 
-                value += Double.parseDouble(String.valueOf(mainTable.mainTable.getModel().getValueAt(i, j)));
+                value += Double.parseDouble(String.valueOf(mainTable.tableModel.getValueAt(i, j)));
             }
         }
         mainTable.mainTextArea.setText("Suma wszystkich elementów jest równa: " + value);
@@ -1189,7 +1118,7 @@ public class Main extends JFrame {
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
 
-                    bufferedWriter.write(mainTable.mainTable.getModel().getValueAt(i, j).toString() + " ");
+                    bufferedWriter.write(mainTable.tableModel.getValueAt(i, j).toString() + " ");
                 }
                 bufferedWriter.write(" \n");
             }
@@ -1237,7 +1166,7 @@ public class Main extends JFrame {
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                arrayList.add((Double.parseDouble(String.valueOf(mainTable.mainTable.getModel().getValueAt(i, j)))));
+                arrayList.add((Double.parseDouble(String.valueOf(mainTable.tableModel.getValueAt(i, j)))));
 
             }
         }
@@ -1254,7 +1183,7 @@ public class Main extends JFrame {
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                arrayList.add((Double.parseDouble(String.valueOf(mainTable.mainTable.getModel().getValueAt(i, j)))));
+                arrayList.add((Double.parseDouble(String.valueOf(mainTable.tableModel.getValueAt(i, j)))));
 
             }
         }
@@ -1358,7 +1287,7 @@ public class Main extends JFrame {
                 for (int j = 0; j < 5; j++) {
 
                     try {
-                        bufferedWriter.write(mainTable.mainTable.getModel().getValueAt(i, j).toString() + " ");
+                        bufferedWriter.write(mainTable.tableModel.getValueAt(i, j).toString() + " ");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }

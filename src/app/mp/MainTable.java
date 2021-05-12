@@ -19,30 +19,14 @@ public class MainTable extends JPanel {
     };
 
     JTable mainTable = new JTable(numberData, columnNames);
-
     JScrollPane scrollPane = new JScrollPane(mainTable);
-
     TableSliders tableSliders = new TableSliders();
-
     MainTextArea mainTextArea = new MainTextArea();
-
     CalendarField calendarField = new CalendarField();
-
     Dimension dimension = mainTable.getPreferredSize();
 
 
-    DefaultTableModel tableModel = new DefaultTableModel(numberData,columnNames) {
-        @Override
-        public Class getColumnClass(int index) {
-            return Integer.class;
-        }
-
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return false;
-        }
-    };
-
+    public TableModel tableModel = new TableModel();
 
     MainTable() {
 
@@ -76,50 +60,26 @@ public class MainTable extends JPanel {
        tableSliders.labelField.setPreferredSize(new Dimension(110,30));
        tableSliders.labelField.setMaximumSize(new Dimension(110,30));
 
-        tableSliders.rowLabel.setPreferredSize(new Dimension(120, 30));
-        tableSliders.rowLabel.setMaximumSize(new Dimension(120, 30));
+       tableSliders.rowLabel.setPreferredSize(new Dimension(120, 30));
+       tableSliders.rowLabel.setMaximumSize(new Dimension(120, 30));
 
-        tableSliders.rowSlider.setPreferredSize(new Dimension(170, 50));
-        tableSliders.rowSlider.setMaximumSize(new Dimension(170, 50));
+       tableSliders.rowSlider.setPreferredSize(new Dimension(170, 50));
+       tableSliders.rowSlider.setMaximumSize(new Dimension(170, 50));
 
-        tableSliders.columnLabel.setPreferredSize(new Dimension(120, 30));
-        tableSliders.columnLabel.setMaximumSize(new Dimension(120, 30));
+       tableSliders.columnLabel.setPreferredSize(new Dimension(120, 30));
+       tableSliders.columnLabel.setMaximumSize(new Dimension(120, 30));
 
-        tableSliders.columnSlider.setPreferredSize(new Dimension(170, 50));
-        tableSliders.columnSlider.setMaximumSize(new Dimension(170, 50));
-
-
-        this.add(tableSliders);
-        this.add(scrollPane);
-        this.add(calendarField);
-        this.add(mainTextArea);
+       tableSliders.columnSlider.setPreferredSize(new Dimension(170, 50));
+       tableSliders.columnSlider.setMaximumSize(new Dimension(170, 50));
 
 
-        tableSliders.rowSlider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
+       this.add(tableSliders);
+       this.add(scrollPane);
+       this.add(calendarField);
+       this.add(mainTextArea);
 
-                tableSliders.rowLabel.setText("Wiersz numer = " + tableSliders.rowSlider.getValue());
 
-                if (e.getSource() == tableSliders.rowSlider) {
-                    mainTable.changeSelection(tableSliders.rowSlider.getValue() - 1,tableSliders.columnSlider.getValue() - 1,false,false);
-                }
-            }
-        });
 
-        tableSliders.columnSlider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-
-                tableSliders.columnLabel.setText("Kolumna numer = " + tableSliders.columnSlider.getValue());
-
-                if (e.getSource() == tableSliders.columnSlider) {
-                    mainTable.changeSelection(tableSliders.rowSlider.getValue() - 1,tableSliders.columnSlider.getValue() - 1,false,false);
-                }
-            }
-        });
-
-        mainTable.changeSelection(tableSliders.rowSlider.getValue() - 1, tableSliders.columnSlider.getValue() - 1, true,false);
 
        this.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
        this.setBackground(Color.LIGHT_GRAY);
