@@ -45,6 +45,7 @@ public class MainTable extends JPanel {
        mainTable.getTableHeader().setReorderingAllowed(false);
        mainTable.getTableHeader().setResizingAllowed(false);
        mainTable.setRowHeight(33);
+       mainTable.setFont(new Font("Arial",Font.PLAIN,14));
 
        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 

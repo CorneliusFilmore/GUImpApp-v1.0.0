@@ -124,7 +124,7 @@ public class Main extends JFrame {
                     mainTable.tableSliders.textField.setFont(new Font(null, Font.BOLD, 12));
                     mainTable.tableSliders.labelField.setFont(new Font(null, Font.BOLD, 12));
 
-                    mainTable.mainTable.setFont(new Font(null, Font.PLAIN, 12));
+                    mainTable.mainTable.setFont(new Font(null, Font.PLAIN, 14));
                     mainTable.calendarField.calendar.setFont(new Font(null, Font.BOLD, 14));
                     mainTable.calendarField.chartButton.setFont(new Font(null,Font.BOLD,14));
 
@@ -444,17 +444,13 @@ public class Main extends JFrame {
                 );
 
                 if (newInt == JOptionPane.YES_OPTION) {
-                    for (int i = 0; i < 5; i++) {
-                        for (int j = 0; j < 5; j++) {
-                            mainTable.tableModel.setValueAt(0, i, j);
-                        }
+                        zeroMethod(mainTable);
                     }
 
                     statusBar.infoBar.setText("UTWORZONO");
                     statusBar.statusBar.setText("Utworzono pusty plik");
 
                 }
-            }
         });
 
         /**
@@ -684,8 +680,21 @@ public class Main extends JFrame {
         northPane.fifthButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int newInt = JOptionPane.showOptionDialog(
+                        frame,
+                        "Czy napewno chcesz wyzerować tablicę?",
+                        "Uwaga",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.WARNING_MESSAGE,
+                        null,
+                        new String[]{"Tak", "Nie"},
+                        "Tak"
+                );
 
-                zeroMethod(frame, mainTable);
+                zeroMethod(mainTable);
+
+                statusBar.infoBar.setText("WYZEROWANO");
+                statusBar.statusBar.setText("Wyzerowano table");
 
             }
         });
@@ -825,7 +834,22 @@ public class Main extends JFrame {
         sideButtons.zeroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                zeroMethod(frame, mainTable);
+                int newInt = JOptionPane.showOptionDialog(
+                        frame,
+                        "Czy napewno chcesz wyzerować tablicę?",
+                        "Uwaga",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.WARNING_MESSAGE,
+                        null,
+                        new String[]{"Tak", "Nie"},
+                        "Tak"
+                );
+                if (newInt == JOptionPane.YES_OPTION) {
+                    zeroMethod(mainTable);
+                }
+
+                statusBar.infoBar.setText("WYZEROWANO");
+                statusBar.statusBar.setText("Wyzerowano table");
             }
         });
 
@@ -929,28 +953,12 @@ public class Main extends JFrame {
 
 
 
-    private static void zeroMethod(MainFrame frame, MainTable mainTable) {
-        int newInt = JOptionPane.showOptionDialog(
-                frame,
-                "Czy napewno chcesz wyzerować tablicę?",
-                "Uwaga",
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.WARNING_MESSAGE,
-                null,
-                new String[]{"Tak", "Nie"},
-                "Tak"
-        );
-
-        if (newInt == JOptionPane.YES_OPTION) {
+    private static void zeroMethod(MainTable mainTable) {
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
-                    mainTable.tableModel.setValueAt(0, i, j);
+                    mainTable.tableModel.setValueAt("0", i, j);
+                      }
                 }
-            }
-
-            statusBar.infoBar.setText("WYZEROWANO");
-            statusBar.statusBar.setText("Wyzerowano table");
-        }
     }
 
     private static void maxMinMethod(MainTable mainTable) {
@@ -1166,7 +1174,7 @@ public class Main extends JFrame {
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                arrayList.add((Double.parseDouble(String.valueOf(mainTable.tableModel.getValueAt(i, j)))));
+                arrayList.add((Double.parseDouble(String.valueOf(mainTable.mainTable.getValueAt(i, j)))));
 
             }
         }
@@ -1183,7 +1191,7 @@ public class Main extends JFrame {
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                arrayList.add((Double.parseDouble(String.valueOf(mainTable.tableModel.getValueAt(i, j)))));
+                arrayList.add((Double.parseDouble(String.valueOf(mainTable.mainTable.getValueAt(i, j)))));
 
             }
         }
@@ -1244,7 +1252,7 @@ public class Main extends JFrame {
 
                 for (int i = 0; i < 5; i++) {
                     for (int j = 0; j < 5; j++) {
-                        mainTable.mainTable.setValueAt(sc.next(), i, j);
+                        mainTable.tableModel.setValueAt(sc.next(), i, j);
                     }
                 }
 
@@ -1337,7 +1345,7 @@ public class Main extends JFrame {
         statusBar.statusBar.setText("Otwarto Infromacje o autorze");
 
         JOptionPane.showMessageDialog(frame,
-                "Java Gui App v1.0.0 \n Autor: Maciej Pałubicki \n\n Email: palubicki@codestack.com \n Numer Telefonu: 123456789 \n Copyright \u00a9 by M.Pałubicki 2021",
+                "Java Gui App v1.0.1 \n Autor: Maciej Pałubicki \n\n Email: palubicki@codestack.com \n Numer Telefonu: 123456789 \n Copyright \u00a9 by M.Pałubicki 2021",
                 "Autor",
                 JOptionPane.PLAIN_MESSAGE,
                 logoIcon);
