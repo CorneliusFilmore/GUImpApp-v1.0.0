@@ -219,7 +219,7 @@ public class Main extends JFrame {
          * Sum JavaTaskPane
          */
 
-        taskPane.sumLabel.addMouseListener(new MouseAdapter() {
+        taskPane.sumButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 sumMethod(mainTable);
@@ -227,19 +227,19 @@ public class Main extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                taskPane.sumLabel.setBackground(Color.LIGHT_GRAY);
+                taskPane.sumButton.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                taskPane.sumLabel.setBackground(null);
+                taskPane.sumButton.setBackground(null);
             }
         });
 
         /**
          * Average JavaTaskPane
          */
-        taskPane.averageLabel.addMouseListener(new MouseAdapter() {
+        taskPane.averageButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 averageMethod(mainTable);
@@ -247,12 +247,12 @@ public class Main extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                taskPane.averageLabel.setBackground(Color.LIGHT_GRAY);
+                taskPane.averageButton.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                taskPane.averageLabel.setBackground(null);
+                taskPane.averageButton.setBackground(null);
 
             }
         });
@@ -260,7 +260,7 @@ public class Main extends JFrame {
         /**
          * Max JavaTaskPane
          */
-        taskPane.maxLabel.addMouseListener(new MouseAdapter() {
+        taskPane.maxButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 maxMethod(mainTable);
@@ -268,19 +268,19 @@ public class Main extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                taskPane.maxLabel.setBackground(Color.LIGHT_GRAY);
+                taskPane.maxButton.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                taskPane.maxLabel.setBackground(null);
+                taskPane.maxButton.setBackground(null);
             }
         });
 
         /**
          * Min JavaTaskPane
          */
-        taskPane.minLabel.addMouseListener(new MouseAdapter() {
+        taskPane.minButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 minMethod(mainTable);
@@ -288,19 +288,19 @@ public class Main extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                taskPane.minLabel.setBackground(Color.LIGHT_GRAY);
+                taskPane.minButton.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                taskPane.minLabel.setBackground(null);
+                taskPane.minButton.setBackground(null);
             }
         });
 
         /**
          * Open file JavaTaskPane
          */
-        taskPane.openLabel.addMouseListener(new MouseAdapter() {
+        taskPane.openButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 openMethod(frame,mainTable);
@@ -308,19 +308,19 @@ public class Main extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                taskPane.openLabel.setBackground(Color.LIGHT_GRAY);
+                taskPane.openButton.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                taskPane.openLabel.setBackground(null);
+                taskPane.openButton.setBackground(null);
             }
         });
 
         /**
          * help JavaTaskPane
          */
-        taskPane.helpLabel.addMouseListener(new MouseAdapter() {
+        taskPane.helpButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 helpMethod();
@@ -328,12 +328,12 @@ public class Main extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                taskPane.helpLabel.setBackground(Color.LIGHT_GRAY);
+                taskPane.helpButton.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                taskPane.helpLabel.setBackground(null);
+                taskPane.helpButton.setBackground(null);
             }
         });
 
@@ -341,7 +341,7 @@ public class Main extends JFrame {
          * Author JavaTaskPane
          */
 
-        taskPane.authorLabel.addMouseListener(new MouseAdapter() {
+        taskPane.authorButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 authorMethod(frame);
@@ -349,19 +349,19 @@ public class Main extends JFrame {
 
 
             public void mouseEntered(MouseEvent e) {
-                taskPane.authorLabel.setBackground(Color.LIGHT_GRAY);
+                taskPane.authorButton.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                taskPane.authorLabel.setBackground(null);
+                taskPane.authorButton.setBackground(null);
             }
         });
 
         /**
          * Save JavaTaskPane
          */
-        taskPane.saveLabel.addMouseListener(new MouseAdapter() {
+        taskPane.saveButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 saveMethod(frame,mainTable);
@@ -369,19 +369,19 @@ public class Main extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                taskPane.saveLabel.setBackground(Color.LIGHT_GRAY);
+                taskPane.saveButton.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                taskPane.saveLabel.setBackground(null);
+                taskPane.saveButton.setBackground(null);
             }
         });
 
         /**
          * Save as JavaTaskPane
          */
-        taskPane.saveAsLabel.addMouseListener(new MouseAdapter() {
+        taskPane.saveAsButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 saveAsMethod(frame,mainTable);
@@ -389,19 +389,19 @@ public class Main extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                taskPane.saveAsLabel.setBackground(Color.LIGHT_GRAY);
+                taskPane.saveAsButton.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                taskPane.saveAsLabel.setBackground(null);
+                taskPane.saveAsButton.setBackground(null);
             }
         });
 
         /**
          * Print JavaTaskPane
          */
-        taskPane.printLabel.addMouseListener(new MouseAdapter() {
+        taskPane.printButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 printMethod();
@@ -409,12 +409,12 @@ public class Main extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                taskPane.printLabel.setBackground(Color.LIGHT_GRAY);
+                taskPane.printButton.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                taskPane.printLabel.setBackground(null);
+                taskPane.printButton.setBackground(null);
             }
         });
 
