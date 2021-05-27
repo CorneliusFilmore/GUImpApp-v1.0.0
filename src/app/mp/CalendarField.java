@@ -8,6 +8,10 @@ import java.awt.*;
 
 import java.text.SimpleDateFormat;
 
+/**
+ * Class that contains a Jpanel with a button and calendar combo box
+ */
+
 public class CalendarField extends JPanel {
 
 

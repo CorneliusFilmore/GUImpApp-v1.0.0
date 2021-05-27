@@ -3,6 +3,10 @@ package app.mp;
 import javax.swing.*;
 import java.util.Vector;
 
+/**
+ * Class that contains the model of the list and method connected to them
+ */
+
 public class ListModel extends AbstractListModel {
 
     private static final long serialVersionUID = 1L;

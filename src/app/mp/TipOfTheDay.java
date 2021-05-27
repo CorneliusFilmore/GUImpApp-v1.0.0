@@ -5,6 +5,10 @@ import com.l2fprod.common.swing.tips.DefaultTip;
 import com.l2fprod.common.swing.tips.DefaultTipModel;
 import java.awt.*;
 
+/**
+ * Class that contains the Tip of the day
+ */
+
 public class TipOfTheDay extends JTipOfTheDay {
     DefaultTipModel tipModel = new DefaultTipModel();
 

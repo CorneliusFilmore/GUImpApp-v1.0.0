@@ -3,6 +3,11 @@ package app.mp;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class that Contains the Table Sliders Panel
+ */
+
+
 public class TableSliders extends JPanel {
 
     JSlider rowSlider = new JSlider(JSlider.HORIZONTAL, 1, 5, 1);

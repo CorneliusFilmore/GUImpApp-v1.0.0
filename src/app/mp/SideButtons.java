@@ -3,6 +3,10 @@ package app.mp;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class that contains the panel with all the side buttons
+ */
+
 public class SideButtons extends JPanel {
 
     //Add button on Right menu

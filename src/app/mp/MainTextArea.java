@@ -5,6 +5,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
+/**
+ * Class that contains the Main Text Area
+ */
+
 public class MainTextArea extends JTextArea{
 
     LineBorder lineBorder = new LineBorder(Color.BLACK,2,true);

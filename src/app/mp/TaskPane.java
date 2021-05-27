@@ -32,8 +32,6 @@ public class TaskPane extends JPanel {
     JButton helpButton = new JButton("Pomoc");
     JButton authorButton = new JButton("Autor");
 
-
-
     TaskPane() {
 
         //Button disable border and color
@@ -43,11 +41,13 @@ public class TaskPane extends JPanel {
         sumButton.setOpaque(true);
         sumButton.setHorizontalAlignment(SwingConstants.LEFT);
 
+
         averageButton.setBorderPainted(false);
         averageButton.setContentAreaFilled(false);
         averageButton.setFocusPainted(true);
         averageButton.setOpaque(true);
         averageButton.setHorizontalAlignment(SwingConstants.LEFT);
+
 
         maxButton.setBorderPainted(false);
         maxButton.setContentAreaFilled(false);

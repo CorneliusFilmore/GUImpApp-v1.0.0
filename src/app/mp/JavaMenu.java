@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+/**
+ * Class that contains the JMenuBar
+ */
 public class JavaMenu extends JMenuBar {
 
     JMenu plik = new JMenu("Plik");

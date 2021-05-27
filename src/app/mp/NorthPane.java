@@ -3,6 +3,10 @@ package app.mp;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class that contains the JToolBar named NorthPane
+ */
+
 public class NorthPane extends JToolBar {
 
     JButton firstButton = new JButton();

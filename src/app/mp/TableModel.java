@@ -2,6 +2,9 @@ package app.mp;
 
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * Class that Contains the Table Model and their Methods
+ */
 public class TableModel extends AbstractTableModel {
 
     private final int countRowTable = 5;

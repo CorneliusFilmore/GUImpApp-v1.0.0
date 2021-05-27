@@ -3,6 +3,9 @@ package app.mp;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class that Contains the Status Bar Panel
+ */
 
 public class StatusBar extends JPanel {
 

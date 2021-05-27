@@ -1,5 +1,7 @@
 package app.mp;
 
+import org.apache.log4j.*;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.freixas.jcalendar.DateEvent;
 import org.freixas.jcalendar.DateListener;
 import org.jfree.chart.ChartFactory;
@@ -7,6 +9,8 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.statistics.HistogramDataset;
+import org.jfree.util.Log;
+import org.w3c.dom.DOMConfiguration;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -20,12 +24,24 @@ import java.io.*;
 import java.util.*;
 
 
+/**
+ *  Main Class with all created objects and state listeners
+ * @author Maciej PaLubicki
+ * @version v1.0.2
+ */
+
 public class Main extends JFrame {
 
     static StatusBar statusBar = new StatusBar();
 
+    final static Logger consoleLogger = Logger.getLogger("consoleLogger");
+    final static Logger fileLogger = Logger.getLogger("fileLogger");
 
     public static void main(String[] args) {
+        DOMConfigurator.configure("logconfig.xml");
+
+        fileLogger.info("Start Aplikacji");
+        consoleLogger.info("Start Aplikacji");
 
         MainFrame frame = new MainFrame();
         NorthPane northPane = new NorthPane();
@@ -44,9 +60,8 @@ public class Main extends JFrame {
 
         mainTable.mainTable.changeSelection(mainTable.tableSliders.rowSlider.getValue() - 1, mainTable.tableSliders.columnSlider.getValue() - 1, true,false);
 
-
         /**
-         *  Interface scaling
+         *  Interface scaling Listeners maximized window and minimized
          */
 
         frame.addWindowStateListener(new WindowStateListener() {
@@ -54,7 +69,7 @@ public class Main extends JFrame {
                 // maximized window
                 if ((e.getNewState() & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH) {
 
-                    mainTable.mainTable.setRowHeight(frame.getWidth()/18);
+                    mainTable.mainTable.setRowHeight(frame.getWidth() / 18);
 
                     mainTable.mainTable.setFont(new Font(null, Font.PLAIN, 24));
 
@@ -68,37 +83,37 @@ public class Main extends JFrame {
                     mainTable.tableSliders.labelField.setFont(new Font(null, Font.BOLD, 18));
 
                     mainTable.calendarField.calendar.setFont(new Font(null, Font.BOLD, 18));
-                    mainTable.calendarField.chartButton.setFont(new Font(null,Font.BOLD,18));
+                    mainTable.calendarField.chartButton.setFont(new Font(null, Font.BOLD, 18));
 
-                    mainTable.calendarField.calendar.setPreferredSize(new Dimension(120,50));
-                    mainTable.calendarField.calendar.setMaximumSize(new Dimension(120,50));
+                    mainTable.calendarField.calendar.setPreferredSize(new Dimension(120, 50));
+                    mainTable.calendarField.calendar.setMaximumSize(new Dimension(120, 50));
 
                     mainTable.tableSliders.setPreferredSize(new Dimension(frame.getWidth(), 100));
                     mainTable.tableSliders.setMaximumSize(new Dimension(frame.getWidth(), 100));
 
-                    mainTable.tableSliders.rowLabel.setPreferredSize(new Dimension(frame.getWidth()/6, 50));
-                    mainTable.tableSliders.rowLabel.setMaximumSize(new Dimension(frame.getWidth()/6, 50));
+                    mainTable.tableSliders.rowLabel.setPreferredSize(new Dimension(frame.getWidth() / 6, 50));
+                    mainTable.tableSliders.rowLabel.setMaximumSize(new Dimension(frame.getWidth() / 6, 50));
 
-                    mainTable.tableSliders.rowSlider.setPreferredSize(new Dimension(frame.getWidth()/6, 50));
-                    mainTable.tableSliders.rowSlider.setMaximumSize(new Dimension(frame.getWidth()/6, 50));
+                    mainTable.tableSliders.rowSlider.setPreferredSize(new Dimension(frame.getWidth() / 6, 50));
+                    mainTable.tableSliders.rowSlider.setMaximumSize(new Dimension(frame.getWidth() / 6, 50));
 
-                    mainTable.tableSliders.columnLabel.setPreferredSize(new Dimension(frame.getWidth()/6, 50));
-                    mainTable.tableSliders.columnLabel.setMaximumSize(new Dimension(frame.getWidth()/6, 50));
+                    mainTable.tableSliders.columnLabel.setPreferredSize(new Dimension(frame.getWidth() / 6, 50));
+                    mainTable.tableSliders.columnLabel.setMaximumSize(new Dimension(frame.getWidth() / 6, 50));
 
-                    mainTable.tableSliders.columnSlider.setPreferredSize(new Dimension(frame.getWidth()/6, 50));
-                    mainTable.tableSliders.columnSlider.setMaximumSize(new Dimension(frame.getWidth()/6, 50));
+                    mainTable.tableSliders.columnSlider.setPreferredSize(new Dimension(frame.getWidth() / 6, 50));
+                    mainTable.tableSliders.columnSlider.setMaximumSize(new Dimension(frame.getWidth() / 6, 50));
 
-                    mainTable.tableSliders.labelField.setPreferredSize(new Dimension(frame.getWidth()/6, 50));
-                    mainTable.tableSliders.labelField.setMaximumSize(new Dimension(frame.getWidth()/6, 50));
+                    mainTable.tableSliders.labelField.setPreferredSize(new Dimension(frame.getWidth() / 6, 50));
+                    mainTable.tableSliders.labelField.setMaximumSize(new Dimension(frame.getWidth() / 6, 50));
 
-                    mainTable.tableSliders.textField.setPreferredSize(new Dimension(frame.getWidth()/6, 30));
-                    mainTable.tableSliders.textField.setMaximumSize(new Dimension(frame.getWidth()/6, 30));
+                    mainTable.tableSliders.textField.setPreferredSize(new Dimension(frame.getWidth() / 6, 30));
+                    mainTable.tableSliders.textField.setMaximumSize(new Dimension(frame.getWidth() / 6, 30));
 
                     mainTable.mainTextArea.setPreferredSize(new Dimension(frame.getWidth(), 200));
                     mainTable.mainTextArea.setMaximumSize(new Dimension(frame.getWidth(), 200));
 
-                    mainTable.calendarField.setPreferredSize(new Dimension(frame.getWidth(),50));
-                    mainTable.calendarField.setMaximumSize(new Dimension(frame.getWidth(),50));
+                    mainTable.calendarField.setPreferredSize(new Dimension(frame.getWidth(), 50));
+                    mainTable.calendarField.setMaximumSize(new Dimension(frame.getWidth(), 50));
 
 
                     statusBar.setPreferredSize(new Dimension(frame.getWidth(), 40));
@@ -112,7 +127,6 @@ public class Main extends JFrame {
 
 
                 }
-                // minimized window
                 else {
                     mainTable.mainTable.setRowHeight(33);
 
@@ -168,6 +182,9 @@ public class Main extends JFrame {
             }
         });
 
+        /**
+         * State changed Row Slider and Table Slider
+         */
 
         mainTable.tableSliders.rowSlider.addChangeListener(new ChangeListener() {
             @Override
@@ -196,11 +213,10 @@ public class Main extends JFrame {
 
 
 
-
-
         /**
-         * Adding tip of the day when the window opens
+         * Tip of the Day listener
          */
+
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -210,13 +226,9 @@ public class Main extends JFrame {
         });
 
 
-        /**
-         *                    JavaTaskPane Action Listeners
-         */
-
 
         /**
-         * Sum JavaTaskPane
+         * Sum button listener JavaTaskPane
          */
 
         taskPane.sumButton.addMouseListener(new MouseAdapter() {
@@ -237,7 +249,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Average JavaTaskPane
+         * Average button listener JavaTaskPane
          */
         taskPane.averageButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -258,7 +270,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Max JavaTaskPane
+         * Max button listener JavaTaskPane
          */
         taskPane.maxButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -278,7 +290,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Min JavaTaskPane
+         * Min button listener JavaTaskPane
          */
         taskPane.minButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -298,7 +310,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Open file JavaTaskPane
+         * Open file button listener JavaTaskPane
          */
         taskPane.openButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -318,7 +330,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * help JavaTaskPane
+         * Help button listener JavaTaskPane
          */
         taskPane.helpButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -338,7 +350,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Author JavaTaskPane
+         * Author button listener JavaTaskPane
          */
 
         taskPane.authorButton.addMouseListener(new MouseAdapter() {
@@ -359,7 +371,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Save JavaTaskPane
+         * Save button listener JavaTaskPane
          */
         taskPane.saveButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -379,7 +391,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Save as JavaTaskPane
+         * Save as button listener JavaTaskPane
          */
         taskPane.saveAsButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -399,7 +411,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Print JavaTaskPane
+         * Printer button listener JavaTaskPane
          */
         taskPane.printButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -420,12 +432,9 @@ public class Main extends JFrame {
 
 
 
-        /**
-         *                    JavaMenu Action Listeners
-         */
 
         /**
-         * Creating a new empty table
+         * JavaMenu Creating a new empty table button
          */
         javaMenu.nowy.addActionListener(new ActionListener() {
 
@@ -450,11 +459,13 @@ public class Main extends JFrame {
                     statusBar.infoBar.setText("UTWORZONO");
                     statusBar.statusBar.setText("Utworzono pusty plik");
 
+                    fileLogger.info("Utworzono pusty plik");
+                    consoleLogger.info("Utworzono pusty plik");
                 }
         });
 
         /**
-         * Open a file
+         * JavaMenu Open a file button
          */
         javaMenu.otworz.addActionListener(new ActionListener() {
             @Override
@@ -464,7 +475,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Saving the table results to default file table.txt
+         *JavaMenu Saving the table results to default file table.txt button
          */
         javaMenu.zapisz.addActionListener(new ActionListener() {
             @Override
@@ -474,7 +485,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Saving to a custom named file
+         * JavaMenu Saving to a custom named file button
          */
         javaMenu.zapiszJako.addActionListener(new ActionListener() {
             @Override
@@ -485,21 +496,24 @@ public class Main extends JFrame {
     });
 
         /**
-         * Exit the java application
+         * JavaMenu Exit the java application button
          */
         javaMenu.zakoncz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 statusBar.infoBar.setText("WYJŚCIE");
-                statusBar.statusBar.setText("Wyłączono aplikacje");
+                statusBar.statusBar.setText("WyLączono aplikacje");
+
+                fileLogger.info("WyLączono aplikacje");
+                consoleLogger.info("WyLączono aplikacje");
 
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
         });
 
         /**
-         * Hide the right menuBar
+         * JavaMenu Hide the right menuBar button
          */
         javaMenu.schowajPasekNarzedzi.addActionListener(new ActionListener() {
             @Override
@@ -507,12 +521,18 @@ public class Main extends JFrame {
 
                 if (sideButtons.visibilitySideButtons) {
 
+                    fileLogger.info("Schowano Pasek Narzędzi");
+                    consoleLogger.info("Schowano Pasek Narzędzi");
+
                     statusBar.infoBar.setText("SCHOWANO");
                     statusBar.statusBar.setText("Schowano Pasek Narzędzi");
 
                     sideButtons.setVisible(false);
                     sideButtons.visibilitySideButtons = false;
                 } else {
+
+                    fileLogger.info("Odkryto Pasek Narzędzi");
+                    consoleLogger.info("Odkryto Pasek Narzędzi");
 
                     statusBar.infoBar.setText("ODKRYTO");
                     statusBar.statusBar.setText("Odkryto Pasek Narzędzi");
@@ -525,7 +545,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Hide status bar
+         * JavaMenu Hide status bar button
          */
         javaMenu.schowajPasekStatusu.addActionListener(new ActionListener() {
             @Override
@@ -533,6 +553,9 @@ public class Main extends JFrame {
                 if (statusBar.statusBarVisibility) {
 
                     mainTable.mainTable.setRowHeight(mainTable.mainTable.getRowHeight() + 7);
+
+                    fileLogger.info("Schowano Pasek Statusu");
+                    consoleLogger.info("Schowano Pasek Statusu");
 
                     statusBar.infoBar.setText("SCHOWANO");
                     statusBar.statusBar.setText("Schowano Pasek Statusu");
@@ -542,6 +565,9 @@ public class Main extends JFrame {
                 } else {
 
                     mainTable.mainTable.setRowHeight(mainTable.mainTable.getRowHeight() - 7);
+
+                    fileLogger.info("Odkryto Pasek Statusu");
+                    consoleLogger.info("Odkryto Pasek Statusu");
 
                     statusBar.infoBar.setText("ODKRYTO");
                     statusBar.statusBar.setText("Odkryto Pasek Statusu");
@@ -553,6 +579,10 @@ public class Main extends JFrame {
             }
         });
 
+        /**
+         * JavaMenu Hide task pane button
+         */
+
         javaMenu.schowajTaskPane.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -561,12 +591,19 @@ public class Main extends JFrame {
                     statusBar.infoBar.setText("SCHOWANO");
                     statusBar.statusBar.setText("Schowano Pasek Statusu");
 
+                    fileLogger.info("Schowano Pasek Statusu");
+                    consoleLogger.info("Schowano Pasek Statusu");
+
+
                     taskPane.setVisible(false);
                     taskPane.taskPaneVisibility = false;
                 } else {
 
-                    statusBar.infoBar.setText("SCHOWANO");
-                    statusBar.statusBar.setText("Schowano Pasek Statusu");
+                    statusBar.infoBar.setText("ODKRYTO");
+                    statusBar.statusBar.setText("Odkryto Pasek Statusu");
+
+                    fileLogger.info("Odkryto Pasek Statusu");
+                    consoleLogger.info("Odkryto Pasek Statusu");
 
                     taskPane.setVisible(true);
                     taskPane.taskPaneVisibility = true;
@@ -575,7 +612,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * The sum of all Elements in the array
+         * JavaMenu The sum of all Elements in the array button
          */
         javaMenu.sumaElementow.addActionListener(new ActionListener() {
             @Override
@@ -585,7 +622,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * The average of all Elements in the array
+         * JavaMenu The average of all Elements in the array button
          */
         javaMenu.sredniaElementow.addActionListener(new ActionListener() {
             @Override
@@ -595,7 +632,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * The Max and Min value in the array
+         * JavaMenu The Max and Min value in the array button
          */
         javaMenu.wartoscMaxMin.addActionListener(new ActionListener() {
             @Override
@@ -606,7 +643,7 @@ public class Main extends JFrame {
         });
 
         /**
-         *  Help instructions
+         * JavaMenu Help instructions button
          */
         javaMenu.pomocInformacje.addActionListener(new ActionListener() {
             @Override
@@ -616,7 +653,7 @@ public class Main extends JFrame {
         });
 
         /**
-         *  Information about the author
+         * JavaMenu Information about the author button
          */
         javaMenu.informacjeAutor.addActionListener(new ActionListener() {
             @Override
@@ -627,12 +664,7 @@ public class Main extends JFrame {
 
 
         /**
-         *                       North Pane Action listiners
-         */
-
-
-        /**
-         * Save button NorthPane
+         *  Save button NorthPane button
          */
         northPane.firstButton.addActionListener(new ActionListener() {
             @Override
@@ -642,7 +674,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Print Button NorthPane
+         *  Print NorthPane button
          */
         northPane.secondButton.addActionListener(new ActionListener() {
             @Override
@@ -652,20 +684,23 @@ public class Main extends JFrame {
         });
 
         /**
-         * Exit NorthPane
+         * Exit NorthPane button
          */
         northPane.thirdButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 statusBar.infoBar.setText("WYJŚCIE");
-                statusBar.statusBar.setText("Wyłączono aplikacje");
+                statusBar.statusBar.setText("WyLączono aplikacje");
+
+                fileLogger.info("WyLączono aplikacje");
+                consoleLogger.info("WyLączono aplikacje");
 
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
         });
 
         /**
-         * Add to the table NorthPane
+         * Add to the table button NorthPane
          */
         northPane.fourthButton.addActionListener(new ActionListener() {
             @Override
@@ -675,7 +710,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Zero the table NorthPane
+         * Zero the table button NorthPane
          */
         northPane.fifthButton.addActionListener(new ActionListener() {
             @Override
@@ -696,11 +731,14 @@ public class Main extends JFrame {
                 statusBar.infoBar.setText("WYZEROWANO");
                 statusBar.statusBar.setText("Wyzerowano table");
 
+                fileLogger.info("Wyzerowano table");
+                consoleLogger.info("Wyzerowano table");
+
             }
         });
 
         /**
-         * Fill the Whole table NorthPane
+         * Fill the Whole table button NorthPane
          */
         northPane.sixthButton.addActionListener(new ActionListener() {
             @Override
@@ -711,7 +749,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Sum the whole table NorthPane
+         * Sum the whole table button NorthPane
          */
         northPane.seventhButton.addActionListener(new ActionListener() {
             @Override
@@ -721,7 +759,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Average the whole table NorthPane
+         * Average the whole table button NorthPane
          */
         northPane.eighthButton.addActionListener(new ActionListener() {
             @Override
@@ -731,7 +769,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Min Value in the whole table NorthPane
+         * Min Value in the whole table button NorthPane
          */
         northPane.ninthButton.addActionListener(new ActionListener() {
             @Override
@@ -742,7 +780,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Max Value in the whole table NorthPane
+         * Max Value in the whole table button NorthPane
          */
         northPane.tenthButton.addActionListener(new ActionListener() {
             @Override
@@ -753,7 +791,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Help NorthPane
+         * Help button NorthPane
          */
         northPane.eleventhButton.addActionListener(new ActionListener() {
             @Override
@@ -763,7 +801,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Author NorthPane
+         * Author button NorthPane
          */
         northPane.twelfthButton.addActionListener(new ActionListener() {
             @Override
@@ -772,12 +810,9 @@ public class Main extends JFrame {
             }
         });
 
-        /**
-         *                      Side Buttons Listiners
-         */
 
         /**
-         * Side Buttons add
+         * Side Buttons add button
          */
         sideButtons.addButton.addActionListener(new ActionListener() {
             @Override
@@ -787,7 +822,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Side Buttons fill
+         * Side Buttons fill button
          */
         sideButtons.fillButton.addActionListener(new ActionListener() {
             @Override
@@ -809,15 +844,22 @@ public class Main extends JFrame {
                             mainTable.tableModel.setValueAt(a, i, j);
                         }
                     }
-                    mainTable.mainTextArea.setText("Wypełniono tablicę wartością: " + a);
+                    mainTable.mainTextArea.setText("WypeLniono tablicę wartością: " + a);
 
-                    statusBar.infoBar.setText("WYPEŁNIONO");
-                    statusBar.statusBar.setText("Tablica wypełniona warotścią: " + a);
+                    fileLogger.info("Tablica wypeLniona warotścią: " + a);
+                    consoleLogger.info("Tablica wypeLniona warotścią: " + a);
+
+                    statusBar.infoBar.setText("WYPELNIONO");
+                    statusBar.statusBar.setText("Tablica wypeLniona warotścią: " + a);
 
 
                 } else {
-                    statusBar.infoBar.setText("BŁĄD");
+                    statusBar.infoBar.setText("BLĄD");
                     statusBar.statusBar.setText("Wpisana wartość to nie liczba!");
+
+                    fileLogger.info("Wpisano wartość do tablicy nie bedaca liczba!");
+                    consoleLogger.info("Wpisano wartość do tablicy nie bedaca liczba!");
+
                     mainTable.tableSliders.textField.setBackground(Color.RED);
 
                     JOptionPane.showMessageDialog(frame,
@@ -829,7 +871,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Side Buttons zero
+         * Side Buttons zero button
          */
         sideButtons.zeroButton.addActionListener(new ActionListener() {
             @Override
@@ -848,13 +890,16 @@ public class Main extends JFrame {
                     zeroMethod(mainTable);
                 }
 
+                fileLogger.info("Wyzerowano table");
+                consoleLogger.info("Wyzerowano table");
+
                 statusBar.infoBar.setText("WYZEROWANO");
                 statusBar.statusBar.setText("Wyzerowano table");
             }
         });
 
         /**
-         * Side Buttons save
+         * Side Buttons save button
          */
         sideButtons.saveButton.addActionListener(new ActionListener() {
             @Override
@@ -864,7 +909,7 @@ public class Main extends JFrame {
         });
 
         /**
-         * Side button count
+         * Side button count button
          */
         sideButtons.countButton.addActionListener(new ActionListener() {
             @Override
@@ -896,6 +941,9 @@ public class Main extends JFrame {
         });
 
 
+        /**
+         * Calendar change date button
+         */
         mainTable.calendarField.chartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -936,23 +984,27 @@ public class Main extends JFrame {
             }
         });
 
+        /**
+         * Calendar Date listiner
+         */
 
         mainTable.calendarField.calendar.addDateListener(new DateListener() {
             @Override
             public void dateChanged(DateEvent e) {
                 mainTable.mainTextArea.setText("Zmieniono datę: " + mainTable.calendarField.calendar.getSelectedItem());
+                fileLogger.info("Zmieniono datę: " + mainTable.calendarField.calendar.getSelectedItem());
+                consoleLogger.info("Zmieniono datę: " + mainTable.calendarField.calendar.getSelectedItem());
             }
         });
-
-
-
-
 
         frame.setVisible(true);
     }
 
 
-
+    /**
+     * Method which zeros the whole table
+     * @param mainTable JTable
+     */
     private static void zeroMethod(MainTable mainTable) {
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
@@ -961,6 +1013,10 @@ public class Main extends JFrame {
                 }
     }
 
+    /**
+     * Method which selects the max and min value of the table and prints them out
+     * @param mainTable JTable
+     */
     private static void maxMinMethod(MainTable mainTable) {
         ArrayList<Double> arrayList = new ArrayList<Double>();
 
@@ -973,10 +1029,19 @@ public class Main extends JFrame {
 
         mainTable.mainTextArea.setText("Wartość Min:  " + Collections.min(arrayList) + " Wartość Max: " + Collections.max(arrayList));
 
+        fileLogger.info("Wyznaczono wartość Min = " + Collections.min(arrayList) + " oraz wartość Max = " + Collections.max(arrayList));
+        consoleLogger.info("Wyznaczono wartość Min = " + Collections.min(arrayList) + " oraz wartość Max = " + Collections.max(arrayList));
+
         statusBar.statusBar.setText("Wartość Min: " + Collections.min(arrayList) + " Wartość Max: " + Collections.max(arrayList));
         statusBar.infoBar.setText("WYZNACZONO");
 
     }
+
+    /**
+     * Method which fills the whole table with a given number
+     * @param frame JFrame
+     * @param mainTable JTable
+     */
 
     private static void fillMethod(MainFrame frame, MainTable mainTable) {
         boolean loop = true;
@@ -1005,16 +1070,19 @@ public class Main extends JFrame {
                             mainTable.tableModel.setValueAt(a, i, j);
                         }
                     }
-                    mainTable.mainTextArea.setText("Wypełniono tablicę wartością: " + a);
+                    mainTable.mainTextArea.setText("WypeLniono tablicę wartością: " + a);
 
-                    statusBar.infoBar.setText("WYPEŁNIONO");
-                    statusBar.statusBar.setText("Tablica wypełniona warotścią: " + a);
+                    statusBar.infoBar.setText("WYPELNIONO");
+                    statusBar.statusBar.setText("Tablica wypeLniona warotścią: " + a);
+
+                    fileLogger.info("Wypelnino tablice warotścią: " + a);
+                    consoleLogger.info("Wypelnino tablice warotścią: " + a);
 
 
                     loop = false;
 
                 } else {
-                    statusBar.infoBar.setText("BŁĄD");
+                    statusBar.infoBar.setText("BLAD");
                     statusBar.statusBar.setText("Wpisana wartość to nie liczba!");
 
                     JOptionPane.showMessageDialog(frame,
@@ -1031,6 +1099,11 @@ public class Main extends JFrame {
         }
     }
 
+    /**
+     * Method which adds a number from imput field to the selected row and column
+     * @param frame JFrame
+     * @param mainTable JTable
+     */
     private static void addMethod(MainFrame frame, MainTable mainTable) {
         boolean check = true;
 
@@ -1047,12 +1120,19 @@ public class Main extends JFrame {
             mainTable.tableModel.setValueAt(a, mainTable.tableSliders.rowSlider.getValue() - 1, mainTable.tableSliders.columnSlider.getValue() - 1);
             mainTable.mainTextArea.setText("Dodano wartość: " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
 
+            fileLogger.info("Dodano " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
+            consoleLogger.info("Dodano " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
+
             statusBar.infoBar.setText("DODANO");
             statusBar.statusBar.setText("Dodano " + mainTable.tableSliders.textField.getText() + " do rzędu: " + mainTable.tableSliders.rowSlider.getValue() + " do kolumny " + mainTable.tableSliders.columnSlider.getValue());
 
+
         }else if(a.isEmpty()) {
 
-            statusBar.infoBar.setText("BŁĄD");
+            fileLogger.info("Nie podano wartości w polu dodania liczby!");
+            consoleLogger.info("Nie podano wartości w polu dodania liczby!");
+
+            statusBar.infoBar.setText("BLĄD");
             statusBar.statusBar.setText("Nie podano wartości!");
             mainTable.tableSliders.textField.setBackground(Color.RED);
 
@@ -1066,7 +1146,7 @@ public class Main extends JFrame {
         } else {
 
             mainTable.tableSliders.textField.setBackground(Color.RED);
-            statusBar.infoBar.setText("BŁĄD");
+            statusBar.infoBar.setText("BLAD");
             statusBar.statusBar.setText("Podana wartość nie jest liczbą!");
 
             JOptionPane.showMessageDialog(
@@ -1075,18 +1155,25 @@ public class Main extends JFrame {
                     "Uwaga",
                     JOptionPane.WARNING_MESSAGE);
 
-            mainTable.mainTextArea.setText("Podano błędną wartość nie będącą liczbą!");
+
+            fileLogger.info("Podano bLędną wartość do tabeli nie będącą liczbą!");
+            consoleLogger.info("Podano bLędną wartość do tabeli nie będącą liczbą!");
+
+            fileLogger.info("Podano bLędną wartość do tabeli nie będącą liczbą!");
+            consoleLogger.info("Podano bLędną wartość do tabeli nie będącą liczbą!");
+
+            mainTable.mainTextArea.setText("Podano bLędną wartość nie będącą liczbą!");
             mainTable.tableSliders.textField.setText("");
         }
         mainTable.tableSliders.textField.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         mainTable.tableSliders.textField.requestFocus(true);
 
-
-
-
-
     }
 
+    /**
+     * Method which designates the average of all numbers in the table and prints them out
+     * @param mainTable JTable
+     */
     private static void averageMethod(MainTable mainTable) {
         float value = 0;
         for (int i = 0; i < 5; i++) {
@@ -1098,10 +1185,17 @@ public class Main extends JFrame {
         value = value / 25;
         mainTable.mainTextArea.setText("Średnia ze wszystkich elementów jest równa: " + value);
 
+        fileLogger.info("Obliczono srednia = " + value);
+        consoleLogger.info("Obliczono srednia = " + value);
+
         statusBar.infoBar.setText("OBLICZONO");
         statusBar.statusBar.setText("Średnia wynosi: " + value);
     }
 
+    /**
+     * Method which sums every element in the table and prints them out
+     * @param mainTable JTable
+     */
     private static void sumMethod(MainTable mainTable) {
         float value = 0;
         for (int i = 0; i < 5; i++) {
@@ -1111,6 +1205,9 @@ public class Main extends JFrame {
             }
         }
         mainTable.mainTextArea.setText("Suma wszystkich elementów jest równa: " + value);
+
+        fileLogger.info("Obliczono sume wszystkich elementów = " + value);
+        consoleLogger.info("Obliczono sume wszystkich elementów = " + value);
 
         statusBar.infoBar.setText("OBLICZONO");
         statusBar.statusBar.setText("Suma wynosi: " + value);
@@ -1130,6 +1227,9 @@ public class Main extends JFrame {
                 }
                 bufferedWriter.write(" \n");
             }
+
+            fileLogger.info("Zapisano tabele do pliku table.txt");
+            consoleLogger.info("Zapisano tabele do pliku table.txt");
 
             statusBar.infoBar.setText("ZAPISANO");
             statusBar.statusBar.setText("Zapisano do pliku table.txt");
@@ -1154,6 +1254,9 @@ public class Main extends JFrame {
         }
     }
 
+    /**
+     * Method which opens the help window
+     */
     private static void helpMethod(){
 
             String url = "pomoc/index.html";
@@ -1163,12 +1266,19 @@ public class Main extends JFrame {
                 statusBar.infoBar.setText("OTWARTO");
                 statusBar.statusBar.setText("Otwarto Pomoc");
 
+                fileLogger.info("Otwarto pomoc");
+                consoleLogger.info("Otwarto pomoc");
+
                 Desktop.getDesktop().open(file);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
     }
 
+    /**
+     * Method which designates the max value from table and prints it out
+     * @param mainTable JTable
+     */
     private static void maxMethod(MainTable mainTable){
         ArrayList<Double> arrayList = new ArrayList<Double>();
 
@@ -1181,11 +1291,18 @@ public class Main extends JFrame {
 
         mainTable.mainTextArea.setText("Wartość Max:  " + Collections.max(arrayList));
 
+        fileLogger.info("Obliczono wartość Max = " + Collections.max(arrayList));
+        consoleLogger.info("Obliczono wartość Max = " + Collections.max(arrayList));
+
         statusBar.infoBar.setText("OBLICZONO");
         statusBar.statusBar.setText("Wartość Max: " + Collections.max(arrayList));
 
     }
 
+    /**
+     * Method which designates the min value from table and prints it out
+     * @param mainTable JTable
+     */
     private static void minMethod(MainTable mainTable) {
         ArrayList<Double> arrayList = new ArrayList<Double>();
 
@@ -1198,10 +1315,18 @@ public class Main extends JFrame {
 
         mainTable.mainTextArea.setText("Wartość Min:  " + Collections.min(arrayList));
 
+        fileLogger.info("Obliczono wartość Min = " + Collections.min(arrayList));
+        consoleLogger.info("Obliczono wartość Min = " + Collections.min(arrayList));
+
         statusBar.infoBar.setText("OBLICZONO");
         statusBar.statusBar.setText("Wartość Min: " + Collections.min(arrayList));
     }
 
+    /**
+     * Method which open a window from which you select the file you want to open
+     * @param frame JFrame
+     * @param mainTable JTable
+     */
     private static void openMethod(MainFrame frame,MainTable mainTable) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File("C:\\Users\\Cornelius Filmore\\IdeaProjects\\GUIappMP\\Zapisane pliki"));
@@ -1256,16 +1381,22 @@ public class Main extends JFrame {
                     }
                 }
 
+                fileLogger.info("Otwarto plik o nazwie: " + fileChooser.getSelectedFile().getName());
+                consoleLogger.info("Otwarto plik o nazwie: " + fileChooser.getSelectedFile().getName());
+
                 statusBar.infoBar.setText("OTWARTO");
                 statusBar.statusBar.setText("Otwarto plik o nazwie: " + fileChooser.getSelectedFile().getName());
             } else {
                 JOptionPane.showMessageDialog(frame,
-                        "Otwarto błedny plik tekstowy",
-                        "Błędny Plik!",
+                        "Otwarto bLedny plik tekstowy",
+                        "BLędny Plik!",
                         JOptionPane.ERROR_MESSAGE);
 
-                statusBar.infoBar.setText("BŁĄD");
-                statusBar.statusBar.setText("Otwarto błedny plik o nazwie: " + fileChooser.getSelectedFile().getName());
+                fileLogger.info("Otwarto bLedny plik tekstowy");
+                consoleLogger.info("Otwarto bLedny plik tekstowy");
+
+                statusBar.infoBar.setText("BLAD");
+                statusBar.statusBar.setText("Otwarto bLedny plik o nazwie: " + fileChooser.getSelectedFile().getName());
 
                 System.out.println("Wrong file");
             }
@@ -1273,6 +1404,11 @@ public class Main extends JFrame {
         }
     }
 
+    /**
+     * Method which opens a window in which you save the file with a custom name
+     * @param frame JFrame
+     * @param mainTable JTable
+     */
     private static void saveAsMethod(Frame frame, MainTable mainTable) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File("C:\\Users\\Cornelius Filmore\\IdeaProjects\\GUIappMP\\Zapisane pliki"));
@@ -1320,8 +1456,15 @@ public class Main extends JFrame {
         }
     }
 
+    /**
+     * Method which is used to print files with the printer
+     */
     private static void printMethod() {
         try {
+
+            fileLogger.info("Wydrukowano plik");
+            consoleLogger.info("Wydrukowano plik");
+
             statusBar.infoBar.setText("WYDRUKOWANO");
             statusBar.statusBar.setText("Wydrukowano plik");
 
@@ -1333,11 +1476,19 @@ public class Main extends JFrame {
                 job.print();
             }
         } catch (Exception exc) {
-            statusBar.infoBar.setText("BŁĄD");
-            statusBar.statusBar.setText("Blad drukowania");
 
+            fileLogger.info("Blad drukowania");
+            consoleLogger.info("Blad drukowania");
+
+            statusBar.infoBar.setText("BLAD");
+            statusBar.statusBar.setText("Blad drukowania");
         }
     }
+
+    /**
+     * Method that opens a window with the name of the author
+     * @param frame JFrame
+     */
     private static void authorMethod(MainFrame frame) {
         ImageIcon logoIcon = new ImageIcon("grafika/logo.jpg");
 
@@ -1345,12 +1496,17 @@ public class Main extends JFrame {
         statusBar.statusBar.setText("Otwarto Infromacje o autorze");
 
         JOptionPane.showMessageDialog(frame,
-                "Java Gui App v1.0.1 \n Autor: Maciej Pałubicki \n\n Email: palubicki@codestack.com \n Numer Telefonu: 123456789 \n Copyright \u00a9 by M.Pałubicki 2021",
+                "Java Gui App v1.0.1 \n Autor: Maciej PaLubicki \n\n Email: palubicki@codestack.com \n Numer Telefonu: 123456789 \n Copyright \u00a9 by M.PaLubicki 2021",
                 "Autor",
                 JOptionPane.PLAIN_MESSAGE,
                 logoIcon);
     }
 
+    /**
+     * Method which creates a windows with a chart for number data
+     * @param numberDataHis double[]
+     * @param mainFrame JFrame
+     */
     private static void createChart(double[] numberDataHis,JFrame mainFrame) {
         JDialog dialog = new JDialog();
         HistogramDataset dataset = new HistogramDataset();

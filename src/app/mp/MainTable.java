@@ -1,11 +1,11 @@
 package app.mp;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+/**
+ * Class that contains the panel with the Table, Main Text Area, Calendar field and Sliders
+ */
 
 public class MainTable extends JPanel {
 

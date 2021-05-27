@@ -5,6 +5,11 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+
+/**
+ * Class which contains the main window frame
+ */
+
 public class MainFrame extends JFrame {
 
 
