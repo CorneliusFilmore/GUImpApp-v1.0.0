@@ -1,0 +1,47 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<project name = "GUIappMP" default = "init" basedir=".">
+
+    <property name = "doc" value="bin" />
+    <property name = "grafika" value="grafika" />
+    <property name = "lib" value="lib" />
+    <property name = "Logi" value="Logi" />
+    <property name = "pomoc" value="pomoc" />
+    <property name = "Zapisane pliki" value="Zapisane pliki" />
+    <property name = "src" value="src/app/mp" />
+    <property name="dist" value="dist" />
+
+    <target name = "init">
+        <echo message="Inicjalizacja projektu.." />
+        <delete dir = "bin" />
+        <mkdir dir = "bin" />
+        <delete dir = "dist" />
+        <mkdir dir = "dist" />
+    </target>
+
+
+    <target name = "Compile" depends="init">
+        <echo message="Compilowanie plików źródłowych" />
+        <javac srcdir="${src}" destdir="bin"
+               classpath= " lib/jcalendar.jar;
+                            lib/jcommon-1.0.16.jar;
+                            lib/jfreechart-1.0.19.jar;
+                            lib/jwizard.jar;
+                            lib/l2fprod-common-tasks.jar;
+                            lib/l2fprod-common-totd.jar;
+                            lib/log4j-1.2.17.jar
+                            lib/tablelayout.jar"/>
+        <echo message="Compilowanie zakończone" />
+    </target>
+
+    <target name = "JavaDoc" depends="Compile" >
+        <echo message="Generowanie JavaDoc-a" />
+        <javadoc sourcepath="${src}" destdir="${doc}" />
+        <echo message="Zakończono generowanie JavaDoc-a" />
+    </target>
+
+    <target name="CreateJAR" depends="Compile">
+        <echo message="Tworzenie JAR" />
+        <jar destfile="dist/MyGuiApp.jar" basedir="bin" />
+        <echo message="Koniec tworzenia JAR-a" />
+    </target>
+</project>

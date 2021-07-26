@@ -26,7 +26,7 @@ import java.util.*;
 
 /**
  *  Main Class with all created objects and state listeners
- * @author Maciej PaLubicki
+ * @author Maciej Palubicki
  * @version v1.0.2
  */
 
